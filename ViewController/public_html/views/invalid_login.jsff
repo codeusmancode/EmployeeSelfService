@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" layout="horizontal" halign="center">
+        <af:activeOutputText value="You are not logged in, Click " id="aot1"/>
+        <af:spacer width="2" height="2" id="s1"/>
+        <af:link id="l1" text="here" destination="login"/>
+        <af:spacer width="2" height="10" id="s2"/>
+        <af:activeOutputText value=" to login" id="aot2"/>
+    </af:panelGroupLayout>
+</ui:composition>

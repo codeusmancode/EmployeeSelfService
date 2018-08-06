@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="internet_access_approvalPageDef1" Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <taskFlow id="tf_it_access_approval1" taskFlowId="/WEB-INF/tf_it_access_approval.xml#tf_it_access_approval"
+              activation="deferred" xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+  </executables>
+  <bindings/>
+</pageDefinition>

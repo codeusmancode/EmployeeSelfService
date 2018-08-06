@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="internet_access_approvalPageDef" Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOLoginAccessApprovalHeader1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="VOLoginAccessApprovalHeader1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOLoginAccessApprovalHeader1Iterator" id="VOLoginAccessApprovalHeader1">
+      <nodeDefinition DefName="essp.usg.model.readonly.VOLoginAccessApprovalHeader"
+                      Name="VOLoginAccessApprovalHeader10">
+        <AttrNames>
+          <Item Value="ApprovalHistoryId"/>
+          <Item Value="UserId"/>
+          <Item Value="Active"/>
+          <Item Value="ReqHeaderId"/>
+          <Item Value="Status"/>
+          <Item Value="EmployeeName"/>
+          <Item Value="Designation"/>
+        </AttrNames>
+        <Accessors>
+          <Item Value="VOLoginAccessApprovalLines"/>
+        </Accessors>
+      </nodeDefinition>
+      <nodeDefinition DefName="essp.usg.model.readonly.VOLoginAccessApprovalLines" Name="VOLoginAccessApprovalHeader11">
+        <AttrNames>
+          <Item Value="RequesterName"/>
+          <Item Value="AccessObject"/>
+          <Item Value="ApprovalHistoryId"/>
+          <Item Value="EmpId"/>
+          <Item Value="OtherAccessObject"/>
+          <Item Value="ReqLineId"/>
+          <Item Value="TypeName"/>
+          <Item Value="Justification"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="VOLoginAccessApprovalHeader1Iterator" id="approveRequest" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="approveRequest" IsViewObjectMethod="false"
+                  DataControl="usgesspappmoduleDataControl"
+                  InstanceName="bindings.VOLoginAccessApprovalHeader1Iterator.currentRow" IsLocalObjectReference="true">
+      <NamedData NDName="reqHeaderID" NDType="int"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="hod_approvalsPageDef"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOHODLeavesPortal1" RangeSize="7" DataControl="usgesspappmoduleDataControl"
+              id="VOHODLeavesPortal1Iterator"/>
+    <searchRegion Binds="VOHODLeavesPortal1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VOHODLeavesPortal1Query"/>
+    <iterator id="VOLeavesPortalHr1Iterator" Binds="VOLeavesPortalHr1" DataControl="usgesspappmoduleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOHODLeavesPortal1Iterator" id="VOHODLeavesPortal1">
+      <nodeDefinition DefName="essp.usg.model.updatable.VOHODLeavesPortal" Name="VOHODLeavesPortal10">
+        <AttrNames>
+          <Item Value="SrNo"/>
+          <Item Value="EmpId"/>
+          <Item Value="EmpCode"/>
+          <Item Value="Leavetype"/>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="TotLvs"/>
+          <Item Value="Approved"/>
+          <Item Value="Remarks"/>
+          <Item Value="DeptId"/>
+          <Item Value="Cancel"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="Name"/>
+          <Item Value="LvTypeCode"/>
+          <Item Value="FromT"/>
+          <Item Value="ToT"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="usgesspappmoduleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <attributeValues IterBinding="VOHODLeavesPortal1Iterator" id="EmpCode">
+      <AttrNames>
+        <Item Value="EmpCode"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="VOHODLeavesPortal1Iterator" id="sendNotification" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="sendNotification" IsViewObjectMethod="false"
+                  DataControl="usgesspappmoduleDataControl"
+                  InstanceName="bindings.VOHODLeavesPortal1Iterator.currentRow" IsLocalObjectReference="true">
+      <NamedData NDName="action" NDType="java.lang.String"/>
+      <NamedData NDName="empCode" NDType="java.lang.String"/>
+      <NamedData NDName="emailID" NDType="java.lang.String"/>
+      <NamedData NDName="fromDate" NDType="java.sql.Date"/>
+      <NamedData NDName="name" NDType="java.lang.String"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>

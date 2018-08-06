@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="DashboardCasualLeave"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="essp.usg.model.dashboard.DashboardCasualLeave_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="emp_id"
+    Kind="where"
+    Type="java.lang.String">
+    <Properties>
+      <SchemaBasedProperties>
+        <DISPLAYHINT
+          Value="Hide"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </Variable>
+  <SQLQuery><![CDATA[with leaves_total as (      
+select ea.name,lb.emp_id,       
+       to_char(lb.emp_code) emp_code,       
+       to_char(lb.year,'yyyy') year,       
+       lb.from_date,       
+       lb.to_date,       
+       decode(lb.lv_type,'SL','Sick Leave (SL)','CL','Casual Leave (CL)') lv_type,       
+       lb.entitle_lvs,       
+       lb.availed,ea.hod,lb.lv_type lvtypecode      
+       from leaves_bal lb,uspr.employees_all ea where           
+ to_char(year,'YYYY') = to_char(sysdate,'yyyy')           
+and lv_type in ('SL','CL')           
+and ea.emp_id = lb.emp_id      
+union all           
+select ea.name,lba.emp_id,to_char(lba.emp_code),to_char(sysdate,'yyyy') year,      
+lba.pl_from_date,lba.pl_to_date,'Privileged Leave (PL)' lv_type,lba.pl_e entitle_lvs,lba.pl_a availed,ea.hod,'PL'      
+from LEAVES_BAL_all lba,      
+uspr.employees_all ea       
+where lba.emp_id = ea.emp_id      
+)      
+select b.*       
+from leaves_total b      
+where b.hod = :emp_id      
+and lvtypecode ='CL'      
+order by b.emp_code]]></SQLQuery>
+  <ViewAttribute
+    Name="Name"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmpId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigInteger"
+    ColumnType="BIGINT"
+    AliasName="EMP_ID"
+    Expression="EMP_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="EmpCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Scale="0"
+    Type="java.lang.String"
+    ColumnType="NUMBER"
+    AliasName="EMP_CODE"
+    Expression="EMP_CODE"
+    SQLType="VARCHAR"/>
+  <ViewAttribute
+    Name="Year"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="4"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="YEAR"
+    Expression="YEAR"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="4"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FromDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="FROM_DATE"
+    Expression="FROM_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="ToDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="TO_DATE"
+    Expression="TO_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="LvType"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="21"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LV_TYPE"
+    Expression="LV_TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="21"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EntitleLvs"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ENTITLE_LVS"
+    Expression="ENTITLE_LVS"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Availed"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AVAILED"
+    Expression="AVAILED"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Hod"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HOD"
+    Expression="HOD"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Lvtypecode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="5"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LVTYPECODE"
+    Expression="LVTYPECODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="5"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="EmpId"/>
+  </AttrArray>
+  <ViewLinkAccessor
+    Name="DashboardCasualLeaveDetail"
+    ViewLink="essp.usg.model.dashboard.VLCasualLeave"
+    Type="oracle.jbo.RowIterator"
+    IsUpdateable="false"/>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="essp.usg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

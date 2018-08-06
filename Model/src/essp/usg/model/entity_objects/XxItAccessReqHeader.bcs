@@ -1,0 +1,12 @@
+//Groovy Scripts for essp.usg.model.entity_objects.XxItAccessReqHeader
+
+package essp.usg.model.entity_objects
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="ReqHeaderId")
+def ReqHeaderId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("XX_IT_ACCESS_REQ_HEADER_s",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

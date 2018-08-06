@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+      <f:facet name="menus"/>
+      <f:facet name="toolbar">
+        <af:toolbar id="t2">
+          <af:button text="Export" id="b2">
+            <af:exportCollectionActionListener type="CSV" exportedId="t1" filename="incentive_summary.csv"/>
+          </af:button>
+          <af:button text="Back" id="b1" action="back"/>
+        </af:toolbar>
+      </f:facet>
+      <af:table value="#{bindings.IncentiveSummary1.collectionModel}" var="row"
+                rows="#{bindings.IncentiveSummary1.rangeSize}"
+                emptyText="#{bindings.IncentiveSummary1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0" fetchSize="#{bindings.IncentiveSummary1.rangeSize}" id="t1"
+                styleClass="AFStretchWidth" autoHeightRows="12">
+        <af:column headerText="#{bindings.IncentiveSummary1.hints.EmployeeId.label}" id="c1">
+          <af:inputText value="#{row.bindings.EmployeeId.inputValue}"
+                        label="#{bindings.IncentiveSummary1.hints.EmployeeId.label}"
+                        required="#{bindings.IncentiveSummary1.hints.EmployeeId.mandatory}"
+                        columns="#{bindings.IncentiveSummary1.hints.EmployeeId.displayWidth}"
+                        maximumLength="#{bindings.IncentiveSummary1.hints.EmployeeId.precision}"
+                        shortDesc="#{bindings.IncentiveSummary1.hints.EmployeeId.tooltip}" id="it1">
+            <f:validator binding="#{row.bindings.EmployeeId.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.IncentiveSummary1.hints.EmployeeId.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column id="c7" headerText="Employee Name">
+          <af:outputText value="#{row.EmployeeName}"
+                         shortDesc="#{bindings.IncentiveSummary1.hints.EmployeeName.tooltip}" id="ot2"/>
+        </af:column>
+        <af:column id="c8" headerText="Employee Designation">
+          <af:outputText value="#{row.Designation}" shortDesc="#{bindings.IncentiveSummary1.hints.Designation.tooltip}"
+                         id="ot1"/>
+        </af:column>
+        <af:column headerText="#{bindings.IncentiveSummary1.hints.Month.label}" id="c2">
+          <af:inputText value="#{row.bindings.Month.inputValue}" label="#{bindings.IncentiveSummary1.hints.Month.label}"
+                        required="#{bindings.IncentiveSummary1.hints.Month.mandatory}"
+                        columns="#{bindings.IncentiveSummary1.hints.Month.displayWidth}"
+                        maximumLength="#{bindings.IncentiveSummary1.hints.Month.precision}"
+                        shortDesc="#{bindings.IncentiveSummary1.hints.Month.tooltip}" id="it2">
+            <f:validator binding="#{row.bindings.Month.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.IncentiveSummary1.hints.Month.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.IncentiveSummary1.hints.HrTotal.label}" id="c3">
+          <af:inputText value="#{row.bindings.HrTotal.inputValue}"
+                        label="#{bindings.IncentiveSummary1.hints.HrTotal.label}"
+                        required="#{bindings.IncentiveSummary1.hints.HrTotal.mandatory}"
+                        columns="#{bindings.IncentiveSummary1.hints.HrTotal.displayWidth}"
+                        maximumLength="#{bindings.IncentiveSummary1.hints.HrTotal.precision}"
+                        shortDesc="#{bindings.IncentiveSummary1.hints.HrTotal.tooltip}" id="it3">
+            <f:validator binding="#{row.bindings.HrTotal.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.IncentiveSummary1.hints.HrTotal.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.IncentiveSummary1.hints.AwTotal.label}" id="c4">
+          <af:inputText value="#{row.bindings.AwTotal.inputValue}"
+                        label="#{bindings.IncentiveSummary1.hints.AwTotal.label}"
+                        required="#{bindings.IncentiveSummary1.hints.AwTotal.mandatory}"
+                        columns="#{bindings.IncentiveSummary1.hints.AwTotal.displayWidth}"
+                        maximumLength="#{bindings.IncentiveSummary1.hints.AwTotal.precision}"
+                        shortDesc="#{bindings.IncentiveSummary1.hints.AwTotal.tooltip}" id="it4">
+            <f:validator binding="#{row.bindings.AwTotal.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.IncentiveSummary1.hints.AwTotal.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.IncentiveSummary1.hints.Minimum.label}" id="c5">
+          <af:inputText value="#{row.bindings.Minimum.inputValue}"
+                        label="#{bindings.IncentiveSummary1.hints.Minimum.label}"
+                        required="#{bindings.IncentiveSummary1.hints.Minimum.mandatory}"
+                        columns="#{bindings.IncentiveSummary1.hints.Minimum.displayWidth}"
+                        maximumLength="#{bindings.IncentiveSummary1.hints.Minimum.precision}"
+                        shortDesc="#{bindings.IncentiveSummary1.hints.Minimum.tooltip}" id="it5">
+            <f:validator binding="#{row.bindings.Minimum.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.IncentiveSummary1.hints.Minimum.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.IncentiveSummary1.hints.IncentiveAmount.label}" id="c6">
+          <af:inputText value="#{row.bindings.IncentiveAmount.inputValue}"
+                        label="#{bindings.IncentiveSummary1.hints.IncentiveAmount.label}"
+                        required="#{bindings.IncentiveSummary1.hints.IncentiveAmount.mandatory}"
+                        columns="#{bindings.IncentiveSummary1.hints.IncentiveAmount.displayWidth}"
+                        maximumLength="#{bindings.IncentiveSummary1.hints.IncentiveAmount.precision}"
+                        shortDesc="#{bindings.IncentiveSummary1.hints.IncentiveAmount.tooltip}" id="it6">
+            <f:validator binding="#{row.bindings.IncentiveAmount.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.IncentiveSummary1.hints.IncentiveAmount.format}"/>
+          </af:inputText>
+        </af:column>
+      </af:table>
+      <f:facet name="statusbar"/>
+    </af:panelCollection>
+  </af:panelGroupLayout>
+</ui:composition>

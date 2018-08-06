@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="login.jsf" id="d1">
+        <af:form id="f1">
+            <af:panelStretchLayout id="pt_psl1" topHeight="95px" dimensionsFrom="auto" startWidth="200px"
+                                   bottomHeight="50px" endWidth="0px">
+                <f:facet name="start"/>
+                <f:facet name="top">
+                    <af:panelSplitter id="pt_ps1" splitterPosition="420" dimensionsFrom="auto" disabled="true"
+                                      inlineStyle=' background-image:url("headerBg.jpg");'>
+                        <f:facet name="first">
+                            <af:panelGroupLayout id="pt_pgl1" layout="horizontal" styleClass="AFStretchWidth">
+                                <af:image id="pt_i1" source="#{resource['images:logo.png']}"/>
+                                <af:outputLabel value="US APPAREL &amp; TEXTILES" id="pt_ol1"
+                                                inlineStyle="font-size:24px; color:#ffffff; font-family:''Times New Roman'';"/>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="second"></f:facet>
+                    </af:panelSplitter>
+                </f:facet>
+                <f:facet name="center">
+                    <af:panelStretchLayout id="psl1" startWidth="33%" endWidth="33%" topHeight="33%" bottomHeight="33%">
+                        <f:facet name="center">
+                            <af:panelGroupLayout id="pgl1" layout="vertical" halign="center">
+                                <af:panelFormLayout id="pflLogin" rows="2" maxColumns="1">
+                                    <af:inputText id="itUsername" label="Username"
+                                                  binding="#{backingBeanScope.ActionBean.itUsername}"/>
+                                    <af:inputText label="Password" id="itPassword" secret="true"
+                                                  binding="#{backingBeanScope.ActionBean.itPassword}"/>
+                                    <af:commandButton text="Login #{sessionScope.sess_username}" id="cbLogin" action="perform_login"/>
+                                </af:panelFormLayout>
+                            </af:panelGroupLayout>
+                        </f:facet>
+                        <f:facet name="bottom">
+                            <af:panelGroupLayout id="pgl2"/>
+                        </f:facet>
+                        <f:facet name="top">
+                            <af:panelGroupLayout id="pgl3"/>
+                        </f:facet>
+                    </af:panelStretchLayout>
+                </f:facet>
+            </af:panelStretchLayout>
+        </af:form>
+    </af:document>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:ActionBean-->
+</f:view>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+  <af:document title="ess_landing.jsf" id="d1">
+    <af:form id="f1">
+      <af:pageTemplate viewId="/usg_template.jsf" id="pt1">
+        <f:facet name="header">
+          <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth" halign="end">
+            <af:link text="Logout" id="l4" action="logout"
+                     inlineStyle="color:white; font-weight:bold;margin-right:5px"/>
+            <af:image id="i1" source="/imageservlet?emp_code=#{sessionScope.sess_empcode}"
+                      inlineStyle="height:48px; width:48px; margin-top:5px;"/>
+            <af:panelGroupLayout id="pgl4" layout="horizontal">
+              <af:outputText value="Logged in as " id="ot1"/>
+              <af:spacer width="2" height="10" id="s2"/>
+              <af:outputText value="#{sessionScope.sess_username}" id="ot2" inlineStyle="font-weight:bold;"/>
+            </af:panelGroupLayout>
+          </af:panelGroupLayout>
+        </f:facet>
+        
+        <f:facet name="main">
+          <af:panelGroupLayout id="pgl2" layout="vertical" halign="center">
+            <af:panelSplitter id="ps1" dimensionsFrom="auto" positionedFromEnd="true" disabled="true"
+                              splitterPosition="130">
+              <f:facet name="first">
+                <af:panelGroupLayout id="pgl3" layout="scroll" halign="center">
+                  <af:region value="#{bindings.tf_landing_page1.regionModel}" id="r1"/>
+                </af:panelGroupLayout>
+                
+              </f:facet>
+              <f:facet name="second">
+                <af:panelGroupLayout id="pgl5" layout="vertical" rendered="#{sessionScope.sess_empcode != null}">
+                  <af:spacer width="10" height="19" id="s1"/>
+                  <af:panelGroupLayout id="pgl11" layout="vertical" halign="center"/>
+                </af:panelGroupLayout>
+              </f:facet>
+            </af:panelSplitter>
+          </af:panelGroupLayout>
+        </f:facet>
+      </af:pageTemplate>
+    </af:form>
+  </af:document>
+</f:view>

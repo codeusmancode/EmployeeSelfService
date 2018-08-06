@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="settings">
+    <default-activity>check_session</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__6">
+      <managed-bean-name>SettingsBean</managed-bean-name>
+      <managed-bean-class>essp.usg.view.Settings</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <router id="check_session">
+      <case id="__1">
+        <expression>#{sessionScope.sess_username != null}</expression>
+        <outcome>OKAY</outcome>
+      </case>
+      <case id="__2">
+        <expression>#{sessionScope.sess_username == null}</expression>
+        <outcome>NOT_OKAY</outcome>
+      </case>
+      <default-outcome>OKAY</default-outcome>
+    </router>
+    <view id="invalid_login">
+      <page>/views/invalid_login.jsff</page>
+    </view>
+    <view id="settings_view">
+      <page>/views/settings.jsff</page>
+    </view>
+    <control-flow-rule id="__3">
+      <from-activity-id>check_session</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>OKAY</from-outcome>
+        <to-activity-id>settings_view</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>NOT_OKAY</from-outcome>
+        <to-activity-id>invalid_login</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

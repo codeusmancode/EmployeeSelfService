@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" halign="center" layout="vertical">
+        <af:spacer width="10" height="25" id="s1"/>
+        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                             layout="vertical" halign="center">
+            <af:activeOutputText value="Leave Application Form" id="aot2" inlineStyle="color:white; font-size:17px;"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:table value="#{bindings.ReadOnlyVOLeaveBalance1.collectionModel}" var="row"
+                  rows="#{bindings.ReadOnlyVOLeaveBalance1.rangeSize}"
+                  emptyText="#{bindings.ReadOnlyVOLeaveBalance1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" fetchSize="#{bindings.ReadOnlyVOLeaveBalance1.rangeSize}" id="t1"
+                  inlineStyle="border:1px black solid" autoHeightRows="3" width="37%" columnStretching="column:c25">
+            <af:column headerText="#{bindings.ReadOnlyVOLeaveBalance1.hints.EmpId.label}" id="c1" rendered="false">
+                <af:outputText value="#{row.EmpId}" shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.EmpId.tooltip}"
+                               id="ot1">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.EmpId.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ReadOnlyVOLeaveBalance1.hints.EmpCode.label}" id="c2" rendered="false">
+                <af:outputText value="#{row.EmpCode}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.EmpCode.tooltip}" id="ot2">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.EmpCode.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ReadOnlyVOLeaveBalance1.hints.Year.label}" id="c3" rendered="false">
+                <af:outputText value="#{row.Year}" shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.Year.tooltip}"
+                               id="ot3">
+                    <af:convertDateTime pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.Year.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ReadOnlyVOLeaveBalance1.hints.FromDate.label}" id="c4" rendered="false">
+                <af:outputText value="#{row.FromDate}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.FromDate.tooltip}" id="ot4">
+                    <af:convertDateTime pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.FromDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="#{bindings.ReadOnlyVOLeaveBalance1.hints.ToDate.label}" id="c5" rendered="false">
+                <af:outputText value="#{row.ToDate}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.ToDate.tooltip}" id="ot5">
+                    <af:convertDateTime pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.ToDate.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column id="c6" width="150">
+                <af:outputText value="#{row.LvType}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.LvType.tooltip}" id="ot6"/>
+            </af:column>
+            <af:column headerText="Entitled" id="c7" width="50" align="center">
+                <af:outputText value="#{row.EntitleLvs}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.EntitleLvs.tooltip}" id="ot7">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.EntitleLvs.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column headerText="Availed" id="c8" width="50" align="center">
+                <af:outputText value="#{row.Availed}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.Availed.tooltip}" id="ot8">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.Availed.format}"/>
+                </af:outputText>
+            </af:column>
+            <af:column id="c25" headerText="Balance" width="50" align="center">
+                <af:outputText value="#{row.Balance}"
+                               shortDesc="#{bindings.ReadOnlyVOLeaveBalance1.hints.Balance.tooltip}" id="ot14">
+                    <af:convertNumber groupingUsed="false"
+                                      pattern="#{bindings.ReadOnlyVOLeaveBalance1.hints.Balance.format}"/>
+                </af:outputText>
+            </af:column>
+        </af:table>
+        <af:panelHeader text="Apply Leave" id="ph1" styleClass="AFStretchWidth">
+            <f:facet name="context">
+                <af:button text="Apply" id="b1" action="new_leave_application" rendered="false"/>
+                <af:button text="Submit " id="b3"
+                           action="#{backingBeanScope.LandingPage.saveToDb}"
+                           disabled="#{bindings.Approved.inputValue ne null}"/>
+                <af:button actionListener="#{bindings.Rollback.execute}" text="Rollback"
+                           disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b2" rendered="false">
+                    <af:resetActionListener/>
+                </af:button>
+            </f:facet>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:table value="#{bindings.VOEOLeavesPortal1.collectionModel}" var="row"
+                      rows="#{bindings.VOEOLeavesPortal1.rangeSize}"
+                      emptyText="#{bindings.VOEOLeavesPortal1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0" selectedRowKeys="#{bindings.VOEOLeavesPortal1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.VOEOLeavesPortal1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.VOEOLeavesPortal1.rangeSize}"
+                      filterModel="#{bindings.VOEOLeavesPortal1Query.queryDescriptor}" filterVisible="true"
+                      queryListener="#{bindings.VOEOLeavesPortal1Query.processQuery}" varStatus="vs" id="t2"
+                      autoHeightRows="7" columnStretching="last" styleClass="AFStretchWidth">
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.SrNo.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.SrNo.label}" id="c9" rendered="false">
+                    <af:inputText value="#{row.bindings.SrNo.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.SrNo.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.SrNo.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.SrNo.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.SrNo.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.SrNo.tooltip}" id="it1">
+                        <f:validator binding="#{row.bindings.SrNo.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOEOLeavesPortal1.hints.SrNo.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.EmpId.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.EmpId.label}" id="c10" rendered="false">
+                    <af:inputText value="#{row.bindings.EmpId.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.EmpId.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.EmpId.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.EmpId.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.EmpId.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.EmpId.tooltip}" id="it2">
+                        <f:validator binding="#{row.bindings.EmpId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOEOLeavesPortal1.hints.EmpId.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.EmpCode.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.EmpCode.label}" id="c11" rendered="false">
+                    <af:inputText value="#{row.bindings.EmpCode.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.EmpCode.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.EmpCode.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.EmpCode.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.EmpCode.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.EmpCode.tooltip}" id="it3">
+                        <f:validator binding="#{row.bindings.EmpCode.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOEOLeavesPortal1.hints.EmpCode.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column id="c23" headerText="#{bindings.VOEOLeavesPortal1.hints.Leavetype.label}" width="100">
+                    <af:selectOneChoice value="#{row.bindings.Leavetype.inputValue}"
+                                        label="#{row.bindings.Leavetype.label}"
+                                        required="#{bindings.VOEOLeavesPortal1.hints.Leavetype.mandatory}"
+                                        shortDesc="#{bindings.VOEOLeavesPortal1.hints.Leavetype.tooltip}" id="soc1"
+                                        autoSubmit="true" readOnly="#{row.Approved ne null}">
+                        <f:selectItems value="#{row.bindings.Leavetype.items}" id="si1"/>
+                        <f:validator binding="#{row.bindings.Leavetype.validator}"/>
+                    </af:selectOneChoice>
+                    <af:selectOneChoice value="#{row.bindings.dayPart.inputValue}" label="#{row.bindings.dayPart.label}"
+                                        required="#{bindings.VOEOLeavesPortal1.hints.dayPart.mandatory}"
+                                        shortDesc="#{bindings.VOEOLeavesPortal1.hints.dayPart.tooltip}" id="soc4"
+                                        rendered="#{row.Approved eq null  and (row.Leavetype eq 'CLH' or row.Leavetype eq 'PLH' or row.Leavetype eq 'SLH')}">
+                        <f:selectItems value="#{row.bindings.dayPart.items}" id="si4"/>
+                        <f:validator binding="#{row.bindings.dayPart.validator}"/>
+                    </af:selectOneChoice>
+                    <f:facet name="footer"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.FromDate.name}"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.FromDate.label}" id="c13" width="210">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOEOLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.FromDate.value}"
+                                      id="id1">
+                            <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.FromDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                        <af:panelGroupLayout id="pgl6" layout="vertical">
+                            <af:inputDate value="#{row.bindings.FromDate.inputValue}"
+                                          required="#{bindings.VOEOLeavesPortal1.hints.FromDate.mandatory}"
+                                          columns="#{bindings.VOEOLeavesPortal1.hints.FromDate.displayWidth}"
+                                          shortDesc="#{bindings.VOEOLeavesPortal1.hints.FromDate.tooltip}" id="id2">
+                                <f:validator binding="#{row.bindings.FromDate.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.FromDate.format}"/>
+                            </af:inputDate>
+                            <af:selectOneChoice value="#{row.bindings.ampm.inputValue}"
+                                                label="#{row.bindings.ampm.label}"
+                                                required="#{bindings.VOEOLeavesPortal1.hints.ampm.mandatory}"
+                                                shortDesc="#{bindings.VOEOLeavesPortal1.hints.ampm.tooltip}" id="soc2"
+                                                rendered="#{row.Approved eq null and (row.Leavetype eq 'SHL' or row.Leavetype eq 'OD') }">
+                                <f:selectItems value="#{row.bindings.ampm.items}" id="si2"/>
+                                <f:validator binding="#{row.bindings.ampm.validator}"/>
+                            </af:selectOneChoice>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl4" layout="vertical"
+                                             rendered="#{row.Approved eq null and (row.Leavetype eq 'SHL' or row.Leavetype eq 'OD' )}">
+                            <af:panelGroupLayout id="pgl7" layout="horizontal">
+                                <af:outputText value="HH" id="ot10"/>
+                                <af:spacer width="10" height="10" id="s3"/>
+                                <af:inputNumberSpinbox value="#{row.bindings.fromHours.inputValue}"
+                                                       required="#{bindings.VOEOLeavesPortal1.hints.fromHours.mandatory}"
+                                                       columns="#{bindings.VOEOLeavesPortal1.hints.fromHours.displayWidth}"
+                                                       shortDesc="#{bindings.VOEOLeavesPortal1.hints.fromHours.tooltip}"
+                                                       id="it11" label="Label 1" minimum="0" maximum="12">
+                                    <f:validator binding="#{row.bindings.fromHours.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VOEOLeavesPortal1.hints.fromHours.format}"/>
+                                </af:inputNumberSpinbox>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl8" layout="horizontal">
+                                <af:outputText value="MI" id="ot11"/>
+                                <af:spacer width="15" height="10" id="s4"/>
+                                <af:inputNumberSpinbox value="#{row.bindings.fromMin.inputValue}"
+                                                       required="#{bindings.VOEOLeavesPortal1.hints.fromMin.mandatory}"
+                                                       columns="#{bindings.VOEOLeavesPortal1.hints.fromMin.displayWidth}"
+                                                       shortDesc="#{bindings.VOEOLeavesPortal1.hints.fromMin.tooltip}"
+                                                       id="it12" label="Label 2" minimum="0" maximum="59"
+                                                       rendered="#{row.Approved eq null}">
+                                    <f:validator binding="#{row.bindings.fromMin.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VOEOLeavesPortal1.hints.fromMin.format}"/>
+                                </af:inputNumberSpinbox>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                        <af:outputText value="#{row.FromT}"
+                                       shortDesc="#{bindings.VOEOLeavesPortal1.hints.FromT.tooltip}" id="ot12"
+                                       rendered="#{(row.Leavetype eq 'SHL' or row.Leavetype eq 'OD' or row.Leavetype eq 'CLH') }"/>
+                    </af:panelGroupLayout>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.ToDate.name}"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.ToDate.label}" id="c14" width="210">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOEOLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ToDate.value}"
+                                      id="id3">
+                            <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.ToDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                        <af:panelGroupLayout id="pgl65" layout="vertical">
+                            <af:inputDate value="#{row.bindings.ToDate.inputValue}"
+                                          required="#{bindings.VOEOLeavesPortal1.hints.ToDate.mandatory}"
+                                          columns="#{bindings.VOEOLeavesPortal1.hints.ToDate.displayWidth}"
+                                          shortDesc="#{bindings.VOEOLeavesPortal1.hints.ToDate.tooltip}" id="id4">
+                                <f:validator binding="#{row.bindings.ToDate.validator}"/>
+                                <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.ToDate.format}"/>
+                            </af:inputDate>
+                            <af:selectOneChoice value="#{row.bindings.ampmTO.inputValue}"
+                                                label="#{row.bindings.ampmTO.label}"
+                                                required="#{bindings.VOEOLeavesPortal1.hints.ampmTO.mandatory}"
+                                                shortDesc="#{bindings.VOEOLeavesPortal1.hints.ampmTO.tooltip}"
+                                                id="soc3"
+                                                rendered="#{row.Approved eq null and (row.Leavetype eq 'SHL' or row.Leavetype eq 'OD') }">
+                                <f:selectItems value="#{row.bindings.ampmTO.items}" id="si3"/>
+                                <f:validator binding="#{row.bindings.ampmTO.validator}"/>
+                            </af:selectOneChoice>
+                        </af:panelGroupLayout>
+                        <af:panelGroupLayout id="pgl44" layout="vertical"
+                                             rendered="#{row.Approved eq null and (row.Leavetype eq 'SHL' or row.Leavetype eq 'OD') }">
+                            <af:panelGroupLayout id="pgl74" layout="horizontal">
+                                <af:outputText value="HH" id="ot104"/>
+                                <af:spacer width="10" height="10" id="s34"/>
+                                <af:inputNumberSpinbox value="#{row.bindings.toHours.inputValue}"
+                                                       required="#{bindings.VOEOLeavesPortal1.hints.toHours.mandatory}"
+                                                       columns="#{bindings.VOEOLeavesPortal1.hints.toHours.displayWidth}"
+                                                       shortDesc="#{bindings.VOEOLeavesPortal1.hints.toHours.tooltip}"
+                                                       id="it13" label="Label 3" minimum="0" maximum="12">
+                                    <f:validator binding="#{row.bindings.toHours.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VOEOLeavesPortal1.hints.toHours.format}"/>
+                                </af:inputNumberSpinbox>
+                            </af:panelGroupLayout>
+                            <af:panelGroupLayout id="pgl84" layout="horizontal">
+                                <af:outputText value="MI" id="ot114"/>
+                                <af:spacer width="15" height="10" id="s44"/>
+                                <af:inputNumberSpinbox value="#{row.bindings.toMin.inputValue}"
+                                                       required="#{bindings.VOEOLeavesPortal1.hints.toMin.mandatory}"
+                                                       columns="#{bindings.VOEOLeavesPortal1.hints.toMin.displayWidth}"
+                                                       shortDesc="#{bindings.VOEOLeavesPortal1.hints.toMin.tooltip}"
+                                                       id="it14" label="Label 4" minimum="0" maximum="59">
+                                    <f:validator binding="#{row.bindings.toMin.validator}"/>
+                                    <af:convertNumber groupingUsed="false"
+                                                      pattern="#{bindings.VOEOLeavesPortal1.hints.toMin.format}"/>
+                                </af:inputNumberSpinbox>
+                            </af:panelGroupLayout>
+                        </af:panelGroupLayout>
+                        <af:outputText value="#{row.ToT}" shortDesc="#{bindings.VOEOLeavesPortal1.hints.ToT.tooltip}"
+                                       id="ot13"
+                                       rendered="#{(row.Leavetype eq 'SHL' or row.Leavetype eq 'OD' or row.Leavetype eq 'CLH') }"/>
+                    </af:panelGroupLayout>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.label}" id="c15" rendered="false">
+                    <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.CreatedBy.tooltip}" id="it5">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.CreationDate.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.CreationDate.label}" id="c16"
+                           rendered="false">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOEOLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                                      id="id5">
+                            <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.CreationDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.CreationDate.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.CreationDate.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.CreationDate.displayWidth}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.CreationDate.tooltip}" id="id6">
+                        <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.CreationDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.TotLvs.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.TotLvs.label}" id="c17" rendered="false">
+                    <af:inputText value="#{row.bindings.TotLvs.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.TotLvs.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.TotLvs.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.TotLvs.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.TotLvs.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.TotLvs.tooltip}" id="it6">
+                        <f:validator binding="#{row.bindings.TotLvs.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOEOLeavesPortal1.hints.TotLvs.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.Approved.name}"
+                           headerText="Status" id="c18">
+                    <af:outputText value="#{row.LeaveStatus}"
+                                   shortDesc="#{bindings.VOEOLeavesPortal1.hints.LeaveStatus.tooltip}" id="ot9"/>
+                </af:column>
+                <af:column id="c24" rendered="false">
+                    <af:inputText value="#{row.EmpCode}" label="#{bindings.EmpCode.hints.label}"
+                                  required="#{bindings.EmpCode.hints.mandatory}"
+                                  columns="#{bindings.EmpCode.hints.displayWidth}"
+                                  maximumLength="#{bindings.EmpCode.hints.precision}"
+                                  shortDesc="#{bindings.EmpCode.hints.tooltip}" id="it7">
+                        <f:validator binding="#{bindings.EmpCode.validator}"/>
+                        <af:convertNumber groupingUsed="false" pattern="#{bindings.EmpCode.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.Remarks.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.Remarks.label}" id="c19" rendered="false">
+                    <af:inputText value="#{row.bindings.Remarks.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.Remarks.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.Remarks.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.Remarks.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.Remarks.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.Remarks.tooltip}" id="it8">
+                        <f:validator binding="#{row.bindings.Remarks.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.DeptId.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.DeptId.label}" id="c20" rendered="false">
+                    <af:inputText value="#{row.bindings.DeptId.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.DeptId.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.DeptId.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.DeptId.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.DeptId.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.DeptId.tooltip}" id="it9">
+                        <f:validator binding="#{row.bindings.DeptId.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.Cancel.name}"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.Cancel.label}" id="c21" rendered="false">
+                    <af:inputText value="#{row.bindings.Cancel.inputValue=='Y'?'HOD Cancelled':''}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.Cancel.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.Cancel.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.Cancel.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.Cancel.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.Cancel.tooltip}" id="it10"
+                                  disabled="true">
+                        <f:validator binding="#{row.bindings.Cancel.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column id="c12" headerText="Reasons">
+                    <af:inputText value="#{row.bindings.Remarks.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.Remarks.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.Remarks.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.Remarks.displayWidth}"
+                                  maximumLength="#{bindings.VOEOLeavesPortal1.hints.Remarks.precision}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.Remarks.tooltip}" id="it4"
+                                  readOnly="#{row.Approved ne null}">
+                        <f:validator binding="#{row.bindings.Remarks.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.name}" filterable="true"
+                           headerText="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.label}" id="c22" rendered="false">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOEOLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.UpdatedDate.value}"
+                                      id="id7">
+                            <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:inputDate value="#{row.bindings.UpdatedDate.inputValue}"
+                                  label="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.label}"
+                                  required="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.mandatory}"
+                                  columns="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.displayWidth}"
+                                  shortDesc="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.tooltip}" id="id8">
+                        <f:validator binding="#{row.bindings.UpdatedDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOEOLeavesPortal1.hints.UpdatedDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+            </af:table>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:LandingPage-->
+</ui:composition>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="incentive_amount_summaryPageDef" Package="essp.usg.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="IncentiveSummary1" RangeSize="12" DataControl="usgesspappmoduleDataControl"
+              id="IncentiveSummary1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="IncentiveSummary1Iterator" id="IncentiveSummary1">
+      <nodeDefinition DefName="essp.usg.model.readonly.IncentiveSummary" Name="IncentiveSummary10">
+        <AttrNames>
+          <Item Value="EmployeeId"/>
+          <Item Value="Month"/>
+          <Item Value="HrTotal"/>
+          <Item Value="AwTotal"/>
+          <Item Value="Minimum"/>
+          <Item Value="IncentiveAmount"/>
+          <Item Value="Designation"/>
+          <Item Value="EmployeeName"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

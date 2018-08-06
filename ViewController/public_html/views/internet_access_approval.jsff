@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+    <af:treeTable value="#{bindings.VOLoginAccessApprovalHeader1.treeModel}" var="node"
+                  selectionListener="#{bindings.VOLoginAccessApprovalHeader1.treeModel.makeCurrent}"
+                  rowSelection="single" id="tt1" styleClass="AFStretchWidth">
+      <f:facet name="nodeStamp">
+        <af:column id="c1" width="400">
+          <af:panelGroupLayout id="pgl2" layout="vertical">
+            <af:outputText value="#{node.EmployeeName}" id="ot1" inlineStyle="font-weight:bold;"/>
+            <af:outputText value="#{node.Designation}" id="ot6"/>
+            <af:button text="Approve Request" id="b1" rendered="#{node.UserId != null}"
+                       action="#{LoginAccessApproval.approveRequest}"/>
+          </af:panelGroupLayout>
+        </af:column>
+      </f:facet>
+      <f:facet name="pathStamp">
+        <af:outputText value="#{node}" id="ot2"/>
+      </f:facet>
+      <af:column id="c2" headerText="Access Item" width="500">
+        <af:outputText value="#{node.AccessObject}" id="ot3"/>
+        <f:facet name="header"/>
+      </af:column>
+      <af:column id="c3">
+        <af:outputText value="#{node.OtherAccessObject}" id="ot4"/>
+      </af:column>
+      <af:column id="c4" headerText="Justification">
+        <af:outputText value="#{node.Justification}" id="ot5"/>
+      </af:column>
+      <f:facet name="header"/>
+    </af:treeTable>
+  </af:panelGroupLayout>
+  <!--oracle-jdev-comment:preferred-managed-bean-name:LoginAccessApproval-->
+</ui:composition>

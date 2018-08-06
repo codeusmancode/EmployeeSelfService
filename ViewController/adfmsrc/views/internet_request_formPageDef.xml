@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="internet_request_formPageDef"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOXxItAccessReqHeader1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="VOXxItAccessReqHeader1Iterator"/>
+    <iterator Binds="AccessObject1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="AccessObject1Iterator"/>
+    <iterator Binds="AccessObjectEmail1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="AccessObjectEmail1Iterator"/>
+    <iterator Binds="AccessObjectInternet1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="AccessObjectInternet1Iterator"/>
+    <iterator id="VOXxItAccessReqLines2Iterator" Binds="VOXxItAccessReqLines2" DataControl="usgesspappmoduleDataControl"
+              RangeSize="25"/>
+  </executables>
+  <bindings>
+    <listOfValues IterBinding="VOXxItAccessReqHeader1Iterator" StaticList="false" Uses="LOV_UserId" id="UserId"/>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="ReqHeaderId">
+      <AttrNames>
+        <Item Value="ReqHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="DesireLogin">
+      <AttrNames>
+        <Item Value="DesireLogin"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="DesireEmail">
+      <AttrNames>
+        <Item Value="DesireEmail"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="ReqDate">
+      <AttrNames>
+        <Item Value="ReqDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="CreationDate">
+      <AttrNames>
+        <Item Value="CreationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="CreatedBy">
+      <AttrNames>
+        <Item Value="CreatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="UpdationDate">
+      <AttrNames>
+        <Item Value="UpdationDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="UpdatedBy">
+      <AttrNames>
+        <Item Value="UpdatedBy"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="VersionNumber">
+      <AttrNames>
+        <Item Value="VersionNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="Name">
+      <AttrNames>
+        <Item Value="Name"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="Designation">
+      <AttrNames>
+        <Item Value="Designation"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="Department">
+      <AttrNames>
+        <Item Value="Department"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOXxItAccessReqHeader1Iterator" id="HodName">
+      <AttrNames>
+        <Item Value="HodName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="AccessObject1Iterator" id="AccessObject1">
+      <nodeDefinition DefName="essp.usg.model.readonly.AccessObjectLoginAccess" Name="AccessObject10">
+        <AttrNames>
+          <Item Value="AccessObjectId"/>
+          <Item Value="AccessObject"/>
+          <Item Value="Selected"/>
+          <Item Value="Other"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AccessObjectEmail1Iterator" id="AccessObjectEmail1">
+      <nodeDefinition DefName="essp.usg.model.readonly.AccessObjectEmail" Name="AccessObjectEmail10">
+        <AttrNames>
+          <Item Value="AccessObject"/>
+          <Item Value="Selected"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="AccessObjectInternet1Iterator" id="AccessObjectInternet1">
+      <nodeDefinition DefName="essp.usg.model.readonly.AccessObjectInternet" Name="AccessObjectInternet10">
+        <AttrNames>
+          <Item Value="Selected"/>
+          <Item Value="AccessObject"/>
+          <Item Value="Justification"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" DataControl="usgesspappmoduleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

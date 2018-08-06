@@ -1,0 +1,12 @@
+//Groovy Scripts for essp.usg.model.entity_objects.CustEmployeeOvertime
+
+package essp.usg.model.entity_objects
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="OvertimeId")
+def OvertimeId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("cust_employee_overtime_seq",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

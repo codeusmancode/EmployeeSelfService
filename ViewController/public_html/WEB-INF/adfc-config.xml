@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <view id="ess_landing">
+    <page>/views/ess_landing.jsf</page>
+    <redirect/>
+  </view>
+  <view id="login">
+    <page>/views/login.jsf</page>
+    <redirect/>
+  </view>
+  <method-call id="doLogin">
+    <method>#{backingBeanScope.ActionBean.doLogin}</method>
+    <outcome>
+      <fixed-outcome>do_next</fixed-outcome>
+    </outcome>
+  </method-call>
+  <method-call id="doLogout">
+    <method>#{backingBeanScope.ActionBean.doLogout}</method>
+    <outcome>
+      <fixed-outcome>do_next2</fixed-outcome>
+    </outcome>
+  </method-call>
+  <view id="hod_approvals">
+    <page>/views/ess_hod_approvals.jsf</page>
+    <redirect/>
+  </view>
+  <view id="settings">
+    <page>/views/settings.jsf</page>
+  </view>
+  <view id="overtime">
+    <page>/views/overtime.jsf</page>
+    <redirect/>
+  </view>
+  <view id="overtime_processing">
+    <page>/overtime_processing.jsf</page>
+  </view>
+  <view id="internet_access_request">
+    <page>/views/internet_access_request.jsf</page>
+    <redirect/>
+  </view>
+  <view id="dashboard">
+    <page>/views/dashboard.jsf</page>
+  </view>
+  <view id="internet_access_approval">
+    <page>/views/internet_access_approval.jsf</page>
+  </view>
+  <control-flow-rule id="__4">
+    <from-activity-id>login</from-activity-id>
+    <control-flow-case id="__5">
+      <from-outcome>perform_login</from-outcome>
+      <to-activity-id>doLogin</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__6">
+    <from-activity-id>doLogin</from-activity-id>
+    <control-flow-case id="__7">
+      <from-outcome>do_next</from-outcome>
+      <to-activity-id>ess_landing</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__2">
+    <from-activity-id>ess_landing</from-activity-id>
+    <control-flow-case id="__8">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__9">
+    <from-activity-id>doLogout</from-activity-id>
+    <control-flow-case id="__10">
+      <from-outcome>do_next2</from-outcome>
+      <to-activity-id>login</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__3">
+    <from-activity-id>hod_approvals</from-activity-id>
+    <control-flow-case id="__11">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__12">
+    <from-activity-id>settings</from-activity-id>
+    <control-flow-case id="__13">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__14">
+    <from-activity-id>overtime</from-activity-id>
+    <control-flow-case id="__15">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__16">
+    <from-activity-id>internet_access_request</from-activity-id>
+    <control-flow-case id="__17">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__18">
+    <from-activity-id>dashboard</from-activity-id>
+    <control-flow-case id="__19">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__20">
+    <from-activity-id>overtime_processing</from-activity-id>
+    <control-flow-case id="__21">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <control-flow-rule id="__22">
+    <from-activity-id>internet_access_approval</from-activity-id>
+    <control-flow-case id="__23">
+      <from-outcome>logout</from-outcome>
+      <to-activity-id>doLogout</to-activity-id>
+    </control-flow-case>
+  </control-flow-rule>
+  <managed-bean id="__1">
+    <managed-bean-name>ActionBean</managed-bean-name>
+    <managed-bean-class>essp.usg.view.AppAction</managed-bean-class>
+    <managed-bean-scope>backingBean</managed-bean-scope>
+  </managed-bean>
+</adfc-config>

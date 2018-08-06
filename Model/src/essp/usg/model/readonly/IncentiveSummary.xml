@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="IncentiveSummary"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchSize="13"
+  QueryHint="FIRST_ROWS_13"
+  FetchMode="FETCH_AS_NEEDED"
+  AccessMode="RANGE_PAGING"
+  RangeSize="13">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="essp.usg.model.readonly.IncentiveSummary_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[with overtime_summary as          
+ (          
+ select  ceo.employee_id,          
+         ceo.overtime_pay_month overtime_pay_month,          
+        sum( ((round( (((aa.late_out_minutes/2)/30))*2)/2)*60)/60) auto_att_overtime,           
+        sum(ceo.overtime_hours) user_overtime          
+from cust_employee_overtime ceo,          
+     auto_attendance aa          
+where           
+ ceo.employee_id = aa.emp_id     
+ --and ceo.employee_id = 186890       
+and ceo.overtime_date = aa.dated           
+and ceo.overtime_pay_month =  (select pay_month from cust_incentive_params)     
+and ceo.pay_year = (select pay_year from cust_incentive_params) --change this and make this a parameter                
+group by ceo.employee_id,          
+        ceo.overtime_pay_month ,ceo.pay_year                              
+  )       
+  select os.employee_id,          
+       os.overtime_pay_month month,          
+       os.auto_att_overtime hr_total,          
+       os.user_overtime aw_total,          
+       least(os.auto_att_overtime,os.user_overtime) minimum,          
+       least(os.auto_att_overtime,os.user_overtime)*decode(ea.desg_id,'WD66',rt.fc_rate,rt.rate) incentive_amount,         
+       ea.desg_id,         
+       ea.name employee_name,         
+       d.name designation ,  
+       ea.join_date        
+  from overtime_summary os,          
+  cust_incentive_hourly_rate rt,         
+  uspr.employees_all ea,         
+  USPR.USPR_COMMON_LOOKUPS_DETAIL d          
+  where os.overtime_pay_month = rt.month_code           
+  and rt.active='Y'         
+  and ea.emp_id = os.employee_id         
+  and d.lookup_detail_id = ea.desg_id         
+  and ea.emp_id in ( select  emp_id from uspr.employees_all ea          
+  where ea.dept_id= 'OP01' AND PAYROLL_GROUP_ID = 'WG' AND ACTIVE = 'Y'    
+  and ea.join_date < (select criteria_date from cust_incentive_params))]]></SQLQuery>
+  <ViewAttribute
+    Name="EmployeeId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="EMPLOYEE_ID"
+    Expression="EMPLOYEE_ID"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.readonly.IncentiveSummary.EmployeeId_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Month"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="MONTH"
+    Expression="MONTH"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="HrTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="HR_TOTAL"
+    Expression="HR_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.readonly.IncentiveSummary.HrTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AwTotal"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="AW_TOTAL"
+    Expression="AW_TOTAL"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.readonly.IncentiveSummary.AwTotal_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Minimum"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="MINIMUM"
+    Expression="MINIMUM"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.readonly.IncentiveSummary.Minimum_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="IncentiveAmount"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="INCENTIVE_AMOUNT"
+    Expression="INCENTIVE_AMOUNT"
+    SQLType="NUMERIC">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.readonly.IncentiveSummary.IncentiveAmount_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="DesgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="10"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESG_ID"
+    Expression="DESG_ID"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="10"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmployeeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="EMPLOYEE_NAME"
+    Expression="EMPLOYEE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Designation"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESIGNATION"
+    Expression="DESIGNATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="JoinDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="JOIN_DATE"
+    Expression="JOIN_DATE"
+    SQLType="DATE"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="EmployeeId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="essp.usg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

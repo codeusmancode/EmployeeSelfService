@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SDM>
+   <OverallProperties
+      id="OverallProperties1"/>
+   <Router
+      id="Router2">
+      <property
+         name="activityId">check_session</property>
+      <property
+         name="x">118.0</property>
+      <property
+         name="start">true</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>check_session&lt;/b> (Default Activity)&lt;/p>&lt;p>Activity Type:  Router&lt;/p></property>
+      <property
+         name="y">133.6377</property>
+      <property
+         name="exceptionHandler">false</property>
+   </Router>
+   <View
+      id="View3">
+      <property
+         name="activityId">invalid_login</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">316.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>invalid_login&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">242.24707</property>
+      <property
+         name="page">/views/invalid_login.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <View
+      id="View4">
+      <property
+         name="activityId">settings_view</property>
+      <property
+         name="pageFragment">true</property>
+      <property
+         name="x">340.0</property>
+      <property
+         name="description">&lt;html>&lt;p>&lt;b>settings_view&lt;/b>&lt;/p>&lt;p>Activity Type:  View&lt;/p></property>
+      <property
+         name="y">93.5459</property>
+      <property
+         name="page">/views/settings.jsff</property>
+      <property
+         name="exceptionHandler">false</property>
+   </View>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase5"
+      from="Router2"
+      to="View4">
+      <property
+         name="fromOutcome">OKAY</property>
+      <property
+         name="sdm:polyPoints">R45,159.95404,128.83307,298.04596,93.19531,L50</property>
+   </ControlFlowCase>
+   <ControlFlowCase
+      islink="true"
+      id="ControlFlowCase6"
+      from="Router2"
+      to="View3">
+      <property
+         name="fromOutcome">NOT_OKAY</property>
+      <property
+         name="sdm:polyPoints">R55,159.95404,137.74115,274.04596,241.89648,L50</property>
+   </ControlFlowCase>
+</SDM>

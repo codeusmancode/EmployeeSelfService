@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<af:pageTemplateDef xmlns:af="http://xmlns.oracle.com/adf/faces/rich" var="attrs" definition="private"
+                    xmlns:afc="http://xmlns.oracle.com/adf/faces/rich/component" xmlns:f="http://java.sun.com/jsf/core">
+    <af:xmlContent>
+        <afc:component>
+            <afc:description/>
+            <afc:display-name>usg_template</afc:display-name>
+            <afc:facet>
+                <afc:facet-name>header</afc:facet-name>
+            </afc:facet>
+            <afc:facet>
+                <afc:facet-name>side</afc:facet-name>
+            </afc:facet>
+            <afc:facet>
+                <afc:facet-name>main</afc:facet-name>
+            </afc:facet>
+        </afc:component>
+    </af:xmlContent>
+    <af:panelStretchLayout id="pt_psl1" topHeight="95px" dimensionsFrom="auto" startWidth="200px" bottomHeight="50px"
+                           endWidth="0px" inlineStyle="background-color:#F5F5F5;">
+        <f:facet name="start">
+            <af:panelGroupLayout id="pt_pgl2" layout="vertical" halign="left"
+                                 rendered="#{sessionScope.sess_username != null}">
+                <af:spacer width="10" height="25" id="pt_s1"/>
+                <af:button text="Apply Leaves" id="pt_b2" destination="ess_landing"
+                           inlineStyle="width:197px; color:black;"/>
+                <af:button text="Approve Leaves" id="pt_b1" destination="hod_approvals"
+                           inlineStyle="width:197px; color:black;"/>
+                <af:button text="Change Password" id="pt_b3" destination="settings"
+                           inlineStyle="width:197px; color:black;"/>
+                <af:button text="Finishing Incentive" id="pt_b5" destination="overtime"
+                           inlineStyle="width:197px; color:black;"
+                           rendered="#{sessionScope.OVERTIME_SUPERUSER  eq sessionScope.sess_username}"/>
+                <af:button text="Internet Access Request" id="pt_b6" destination="internet_access_request"
+                           rendered="true"
+                           inlineStyle="width:197px; color:black;"/>
+                <af:button text="Approve Login Access" id="pt_b7" destination="internet_access_approval"
+                           inlineStyle="width:197px; color:black;"
+                           rendered="#{sessionScope.LOGIN_APPROVER  eq sessionScope.sess_username}"/>
+                <af:button text="Dashboard" id="pt_b6s" destination="dashboard"
+                           rendered="false"/>
+                <af:button text="Logout" id="pt_b4" action="#{backingBeanScope.ActionBean.logout_link_template}"
+                           inlineStyle="width:197px; color:black;"/>
+                <af:panelGroupLayout id="pt_pgl3" layout="vertical">
+                    <af:panelBox text="How to Apply Leaves" id="pt_pb1" disclosed="false">
+                        <f:facet name="toolbar"/>
+                        <af:panelGroupLayout id="pt_pgl4" layout="scroll" halign="left">
+                            <af:outputText value="Employee may apply leaves as per company policy and available balance against his/her entitlement with multiple leave types." id="pt_ot2"
+                                           inlineStyle="text-align:center; text-justify:auto; text-indent:0pt;"/>
+                            <af:outputText value="Casual / Annual / Sick" id="pt_ot3" inlineStyle="font-weight:bold;"/>
+                            <af:activeOutputText value="In case of one day leave, 'to date' value is optional. System will populate the 'to date' by default. However, for more than one day leaves 'to date' value is mandatory. In case of half day, user will have to select any of the half 'First' or 'Second' from the list of values. After reviewing entered information click on 'Submit' button to apply the leave."
+                                                 id="pt_aot1"
+                                                 inlineStyle="text-align:justify; text-justify:inter-word;"/>
+                            <af:activeOutputText value="Short Leave" id="pt_aot2" inlineStyle="font-weight:bold;"/>
+                            <af:activeOutputText value="Short Leave of two hours can be availed at any time during office / work hours. To apply short leave employee will have to give 'from date and time' System will by default populate the 'to date and time' as per short leave policy of 2 hours."
+                                                 id="pt_aot3"/>
+                            <af:outputText value="Official Work" id="pt_ot4" inlineStyle="font-weight:bold;"/>
+                            <af:activeOutputText value="Official work commonly known as OD can be applied anytime. User will have to enter both from and to date &amp; time'."
+                                                 id="pt_aot4"/>
+                        </af:panelGroupLayout>
+                    </af:panelBox>
+                </af:panelGroupLayout>
+            </af:panelGroupLayout>
+        </f:facet>
+        <f:facet name="top">
+            <af:panelSplitter id="pt_ps1" splitterPosition="550" dimensionsFrom="auto" disabled="true"
+                              inlineStyle=' background-image:url("headerBg.jpg");'>
+                <f:facet name="first">
+                    <af:panelGroupLayout id="pt_pgl1" layout="horizontal" styleClass="AFStretchWidth">
+                        <af:image id="pt_i1" source="#{resource['images:logo.png']}"/>
+                        <af:outputLabel value="US APPAREL &amp; TEXTILES (PVT) LTD." id="pt_ol1"
+                                        inlineStyle="font-size:24px; color:#ffffff; font-family:''Times New Roman'';"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="second">
+                    <af:facetRef facetName="header"/>
+                </f:facet>
+            </af:panelSplitter>
+        </f:facet>
+        <f:facet name="center">
+            <af:facetRef facetName="main"/>
+        </f:facet>
+    </af:panelStretchLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:ActionBean-->
+</af:pageTemplateDef>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="leave_app_formPageDef"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ReadOnlyVOLeaveBalance1" RangeSize="3" DataControl="usgesspappmoduleDataControl"
+              id="ReadOnlyVOLeaveBalance1Iterator"/>
+    <iterator Binds="VOEOLeavesPortal1" RangeSize="5" DataControl="usgesspappmoduleDataControl"
+              id="VOEOLeavesPortal1Iterator"/>
+    <searchRegion Binds="VOEOLeavesPortal1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VOEOLeavesPortal1Query"/>
+    <iterator Binds="VOLeavesPortalHr1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="VOLeavesPortalHr1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ReadOnlyVOLeaveBalance1Iterator" id="ReadOnlyVOLeaveBalance1">
+      <nodeDefinition DefName="essp.usg.model.readonly.ReadOnlyVOLeaveBalance" Name="ReadOnlyVOLeaveBalance10">
+        <AttrNames>
+          <Item Value="EmpId"/>
+          <Item Value="EmpCode"/>
+          <Item Value="Year"/>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="LvType"/>
+          <Item Value="EntitleLvs"/>
+          <Item Value="Availed"/>
+          <Item Value="Balance"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="VOEOLeavesPortal1Iterator" id="VOEOLeavesPortal1">
+      <nodeDefinition DefName="essp.usg.model.updatable.VOLeavesPortal" Name="VOEOLeavesPortal10">
+        <AttrNames>
+          <Item Value="SrNo"/>
+          <Item Value="EmpId"/>
+          <Item Value="EmpCode"/>
+          <Item Value="Leavetype"/>
+          <Item Value="FromDate"/>
+          <Item Value="ToDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="CreationDate"/>
+          <Item Value="TotLvs"/>
+          <Item Value="Approved"/>
+          <Item Value="Remarks"/>
+          <Item Value="DeptId"/>
+          <Item Value="Cancel"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="VersionNumber"/>
+          <Item Value="LeaveStatus"/>
+          <Item Value="fromHours"/>
+          <Item Value="fromMin"/>
+          <Item Value="toHours"/>
+          <Item Value="toMin"/>
+          <Item Value="ampm"/>
+          <Item Value="ampmTO"/>
+          <Item Value="FromT"/>
+          <Item Value="ToT"/>
+          <Item Value="dayPart"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <methodAction IterBinding="VOEOLeavesPortal1Iterator" id="submitLeaveAction" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="submitLeaveAction" IsViewObjectMethod="false"
+                  DataControl="usgesspappmoduleDataControl" InstanceName="bindings.VOEOLeavesPortal1Iterator.currentRow"
+                  IsLocalObjectReference="true"
+                  ReturnName="data.usgesspappmoduleDataControl.methodResults.submitLeaveAction_submitLeaveAction_submitLeaveAction_result"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction"
+            DataControl="usgesspappmoduleDataControl"/>
+    <action IterBinding="VOEOLeavesPortal1Iterator" id="CreateInsert"
+            InstanceName="usgesspappmoduleDataControl.VOEOLeavesPortal1" DataControl="usgesspappmoduleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <attributeValues IterBinding="VOLeavesPortalHr1Iterator" id="EmpId">
+      <AttrNames>
+        <Item Value="EmpId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOLeavesPortalHr1Iterator" id="EmpCode">
+      <AttrNames>
+        <Item Value="EmpCode"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" DataControl="usgesspappmoduleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+    <attributeValues IterBinding="VOEOLeavesPortal1Iterator" id="Approved">
+      <AttrNames>
+        <Item Value="Approved"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

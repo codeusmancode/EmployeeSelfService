@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="tf_new_it_request_tf_new_it_request_submitITAccessReqPageDef" Package="essp.usg.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables/>
+  <bindings>
+    <methodAction id="submitITAccessReq" RequiresUpdateModel="true" Action="invokeMethod" MethodName="submitITAccessReq"
+                  IsViewObjectMethod="false" DataControl="usgesspappmoduleDataControl"
+                  InstanceName="bindings.submitITAccessReq.dataControl.dataProvider"/>
+  </bindings>
+</pageDefinition>

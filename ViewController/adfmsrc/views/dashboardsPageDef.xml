@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="dashboardsPageDef"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="DashboardCasualLeaveDetail1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="DashboardCasualLeaveDetail1Iterator"/>
+    <iterator Binds="DashboardCasualLeave1" RangeSize="-1" DataControl="usgesspappmoduleDataControl"
+              id="DashboardCasualLeave1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="DashboardCasualLeaveDetail1Iterator" id="DashboardCasualLeaveDetail1">
+      <nodeDefinition DefName="essp.usg.model.dashboard.DashboardCasualLeaveDetail" Name="DashboardCasualLeaveDetail10">
+        <AttrNames>
+          <Item Value="SrNo"/>
+          <Item Value="EmpCode"/>
+          <Item Value="FromDate"/>
+          <Item Value="Leavetype"/>
+          <Item Value="ToDate"/>
+          <Item Value="TotLvs"/>
+          <Item Value="EmpId"/>
+          <Item Value="Approved"/>
+          <Item Value="Cancel"/>
+          <Item Value="LeaveStatus"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <tree IterBinding="DashboardCasualLeave1Iterator" id="DashboardCasualLeave1" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="essp.usg.model.dashboard.DashboardCasualLeave" Name="DashboardCasualLeave1">
+        <AttrNames>
+          <Item Value="Availed"/>
+          <Item Value="Name"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

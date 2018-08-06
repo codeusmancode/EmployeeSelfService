@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="overtime_processingPageDef"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="EmployeeOvertimeDetail1" RangeSize="14" DataControl="usgesspappmoduleDataControl"
+              id="EmployeeOvertimeDetail1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="EmployeeOvertimeDetail1Iterator" id="EmployeeOvertimeDetail1">
+      <nodeDefinition DefName="essp.usg.model.readonly.EmployeeOvertimeDetail" Name="EmployeeOvertimeDetail10">
+        <AttrNames>
+          <Item Value="OvertimeId"/>
+          <Item Value="EmployeeId"/>
+          <Item Value="Name"/>
+          <Item Value="OvertimePayMonth"/>
+          <Item Value="OvertimeDate"/>
+          <Item Value="Hr"/>
+          <Item Value="Aw"/>
+          <Item Value="MinHours"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

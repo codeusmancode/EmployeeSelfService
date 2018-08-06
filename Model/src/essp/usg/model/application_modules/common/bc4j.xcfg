@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!---->
+<BC4JConfig xmlns="http://xmlns.oracle.com/bc4j/configuration" version="11.1">
+  <AppModuleConfigBag ApplicationName="essp.usg.model.application_modules.usgesspappmodule">
+    <AppModuleConfig name="usgesspappmoduleLocal" jbo.project="essp.usg.model.Model"
+                     ApplicationName="essp.usg.model.application_modules.usgesspappmodule" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.ampool.initpoolsize="8" jbo.ampool.maxpoolsize="100"/>
+      <Database jbo.TypeMapEntries="OracleApps" JDBCDataSource="java:comp/env/jdbc/ustms_connectionDS"/>
+      <Security AppModuleJndiName="essp.usg.model.application_modules.usgesspappmodule"/>
+    </AppModuleConfig>
+    <AppModuleConfig name="usgesspappmoduleShared" jbo.project="essp.usg.model.Model"
+                     ApplicationName="essp.usg.model.application_modules.usgesspappmodule" DeployPlatform="LOCAL">
+      <AM-Pooling jbo.ampool.maxpoolsize="1" jbo.ampool.isuseexclusive="false"/>
+      <Database jbo.TypeMapEntries="OracleApps" JDBCDataSource="java:comp/env/jdbc/ustms_connectionDS"/>
+      <Security AppModuleJndiName="essp.usg.model.application_modules.usgesspappmodule"/>
+    </AppModuleConfig>
+  </AppModuleConfigBag>
+</BC4JConfig>

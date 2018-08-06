@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf_it_access">
+    <default-activity>check_session</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <router id="check_session">
+      <case id="__1">
+        <expression>#{sessionScope.sess_username != null}</expression>
+        <outcome>OKAY</outcome>
+      </case>
+      <case id="__2">
+        <expression>#{sessionScope.sess_username == null}</expression>
+        <outcome>NOT_OKAY</outcome>
+      </case>
+      <default-outcome>NOT_OKAY</default-outcome>
+    </router>
+    <view id="invalid_login">
+      <page>/views/invalid_login.jsff</page>
+    </view>
+    <view id="request_status">
+      <page>/views/request_status.jsff</page>
+    </view>
+    <task-flow-call id="tf_new_it_request">
+      <task-flow-reference>
+        <document>/WEB-INF/tf_new_it_request.xml</document>
+        <id>tf_new_it_request</id>
+      </task-flow-reference>
+    </task-flow-call>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="getActiveInternetReq">
+      <method>#{bindings.getActiveInternetReq.execute}</method>
+      <outcome>
+        <fixed-outcome>getActiveInternetReq</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>check_session</from-activity-id>
+      <control-flow-case id="__7">
+        <from-outcome>NOT_OKAY</from-outcome>
+        <to-activity-id>invalid_login</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__4">
+        <from-outcome>OKAY</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>request_status</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>NEW</from-outcome>
+        <to-activity-id>tf_new_it_request</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__8">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__9">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>getActiveInternetReq</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>getActiveInternetReq</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>getActiveInternetReq</from-outcome>
+        <to-activity-id>request_status</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

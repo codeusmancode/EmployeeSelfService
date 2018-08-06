@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" halign="center" layout="vertical">
+    <af:spacer width="10" height="25" id="s1"/>
+        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                             layout="vertical" halign="center">
+            <af:activeOutputText value="Settings" id="aot2" inlineStyle="color:white; font-size:17px;"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:panelHeader text="Settings" id="ph2">
+            <f:facet name="context">
+                <af:button text="Save" id="b1" action="#{SettingsBean.saveSettings}"/>
+            </f:facet>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:inputText label="New Username:" id="it1" binding="#{SettingsBean.newUsername}"/>
+            <af:inputText label="New Password:" id="it2" binding="#{SettingsBean.newPassword}"/>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:SettingsBean-->
+</ui:composition>

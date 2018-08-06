@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf-dashboard">
+    <default-activity>router1</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <router id="router1">
+      <case id="__1">
+        <expression>#{sessionScope.sess_username != null}</expression>
+        <outcome>OKAY</outcome>
+      </case>
+      <case id="__2">
+        <expression>#{sessionScope.sess_username == null}</expression>
+        <outcome>NOT_OKAY</outcome>
+      </case>
+      <default-outcome>NOT_OKAY</default-outcome>
+    </router>
+    <view id="view1">
+      <page>/views/invalid_login.jsff</page>
+    </view>
+    <view id="dashboards">
+      <page>/views/dashboards.jsff</page>
+    </view>
+    <method-call id="ExecuteWithParams">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="ExecuteWithParams1">
+      <method>#{bindings.ExecuteWithParams.execute}</method>
+      <outcome>
+        <fixed-outcome>ExecuteWithParams</fixed-outcome>
+      </outcome>
+    </method-call>
+    <control-flow-rule id="__3">
+      <from-activity-id>router1</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>NOT_OKAY</from-outcome>
+        <to-activity-id>view1</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__5">
+        <from-outcome>OKAY</from-outcome>
+        <to-activity-id>ExecuteWithParams1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__7">
+      <from-activity-id>ExecuteWithParams1</from-activity-id>
+      <control-flow-case id="__8">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>ExecuteWithParams</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__9">
+      <from-activity-id>ExecuteWithParams</from-activity-id>
+      <control-flow-case id="__10">
+        <from-outcome>ExecuteWithParams</from-outcome>
+        <to-activity-id>dashboards</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

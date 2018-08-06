@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewLink SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewLink
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VLCasualLeave"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge">
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="essp.usg.model.dashboard.VLCasualLeave_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <ViewLinkDefEnd
+    Name="DashboardCasualLeave"
+    Cardinality="1"
+    Source="true"
+    Owner="essp.usg.model.dashboard.DashboardCasualLeave">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="DashboardCasualLeave"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="essp.usg.model.dashboard.DashboardCasualLeave.EmpId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ViewLinkDefEnd
+    Name="DashboardCasualLeaveDetail"
+    Cardinality="-1"
+    Owner="essp.usg.model.dashboard.DashboardCasualLeaveDetail">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_finderName" Value="DashboardCasualLeaveDetail"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="essp.usg.model.dashboard.DashboardCasualLeaveDetail.EmpId"/>
+    </AttrArray>
+  </ViewLinkDefEnd>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="essp.usg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewLink>

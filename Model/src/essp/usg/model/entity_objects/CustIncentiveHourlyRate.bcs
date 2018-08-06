@@ -1,0 +1,12 @@
+//Groovy Scripts for essp.usg.model.entity_objects.CustIncentiveHourlyRate
+
+package essp.usg.model.entity_objects
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="RateId")
+def RateId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("cust_incentive_hourly_rate_seq",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

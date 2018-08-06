@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="internet_access_request.jsf" id="d1">
+        <af:form id="f1">
+            <af:pageTemplate viewId="/usg_template.jsf" id="pt1">
+                <f:facet name="header">
+                    <af:panelGroupLayout id="pgl1" layout="vertical" styleClass="AFStretchWidth" halign="end">
+                        <af:link text="Logout" id="l4" action="logout"
+                                 inlineStyle="color:white; font-weight:bold;margin-right:5px"/>
+                        <af:image id="i1" source="/imageservlet?emp_code=#{sessionScope.sess_empcode}"
+                                  inlineStyle="height:48px; width:48px; margin-top:5px;"/>
+                        <af:panelGroupLayout id="pgl4" layout="horizontal">
+                            <af:outputText value="Logged in as " id="ot1"/>
+                            <af:spacer width="2" height="10" id="s2"/>
+                            <af:outputText value="#{sessionScope.sess_username}" id="ot2"
+                                           inlineStyle="font-weight:bold;"/>
+                        </af:panelGroupLayout>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="side"/>
+                <f:facet name="main">
+                    <af:panelGroupLayout id="pgl2">
+                        <af:region value="#{bindings.tf_it_access1.regionModel}" id="r1"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+            </af:pageTemplate>
+        </af:form>
+    </af:document>
+</f:view>

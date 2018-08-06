@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOXxItLoginAccessReqLines"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="essp.usg.model.updatable.VOXxItLoginAccessReqLinesRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <SQLQuery><![CDATA[SELECT XxItAccessReqLines.REQ_LINE_ID,     
+       XxItAccessReqLines.REQ_HEADER_ID,     
+       XxItAccessReqLines.ACCESS_TYPE,     
+       XxItAccessReqLines.ACCESS_OBJECT,     
+       XxItAccessReqLines.OTHER_ACCESS_OBJECT,     
+       XxItAccessReqLines.CREATION_DATE,     
+       XxItAccessReqLines.CREATED_BY,     
+       XxItAccessReqLines.UPDATION_DATE,     
+       XxItAccessReqLines.UPDATED_BY,     
+       XxItAccessReqLines.VERSION_NUMBER,     
+       XxItAccessReqLines.JUSTIFICATION    
+FROM  XX_IT_ACCESS_REQ_LINES XxItAccessReqLines 
+WHERE  XxItAccessReqLines.ACCESS_TYPE = 1]]></SQLQuery>
+  <EntityUsage
+    Name="XxItAccessReqLines"
+    Entity="essp.usg.model.entity_objects.XxItAccessReqLines"/>
+  <ViewAttribute
+    Name="ReqLineId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="ReqLineId"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="REQ_LINE_ID"/>
+  <ViewAttribute
+    Name="ReqHeaderId"
+    PrecisionRule="true"
+    EntityAttrName="ReqHeaderId"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="REQ_HEADER_ID"/>
+  <ViewAttribute
+    Name="AccessType"
+    PrecisionRule="true"
+    EntityAttrName="AccessType"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="ACCESS_TYPE"/>
+  <ViewAttribute
+    Name="AccessObject"
+    PrecisionRule="true"
+    EntityAttrName="AccessObject"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="ACCESS_OBJECT"/>
+  <ViewAttribute
+    Name="OtherAccessObject"
+    PrecisionRule="true"
+    EntityAttrName="OtherAccessObject"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="OTHER_ACCESS_OBJECT"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="UpdationDate"
+    PrecisionRule="true"
+    EntityAttrName="UpdationDate"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="UPDATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="UpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedBy"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="UPDATED_BY"/>
+  <ViewAttribute
+    Name="VersionNumber"
+    PrecisionRule="true"
+    EntityAttrName="VersionNumber"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="VERSION_NUMBER"/>
+  <ViewAttribute
+    Name="Justification"
+    PrecisionRule="true"
+    EntityAttrName="Justification"
+    EntityUsage="XxItAccessReqLines"
+    AliasName="JUSTIFICATION"/>
+</ViewObject>

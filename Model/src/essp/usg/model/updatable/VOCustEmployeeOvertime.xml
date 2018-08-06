@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOCustEmployeeOvertime"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  RowClass="essp.usg.model.updatable.VOCustEmployeeOvertimeRowImpl"
+  FetchSize="11"
+  QueryHint="FIRST_ROWS_11"
+  FetchMode="FETCH_AS_NEEDED"
+  RowInterface="essp.usg.model.updatable.common.VOCustEmployeeOvertimeRow">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="b_empid"
+    Kind="viewcriteria"
+    Type="java.math.BigDecimal"/>
+  <ViewAccessor
+    Name="usgesspappmodule_MonthCodes1_1"
+    ViewObjectName="essp.usg.model.readonly.MonthCodes"
+    AMUsageName="usgesspappmodule"
+    ViewInstanceName="MonthCodes1"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="usgesspappmodule_EmployeesAll1_1"
+    ViewObjectName="essp.usg.model.readonly.EmployeesAll"
+    AMUsageName="usgesspappmodule"
+    ViewInstanceName="EmployeesAll1"
+    RowLevelBinds="false"
+    FetchSize="10"
+    RangeSize="10"/>
+  <ListBinding
+    Name="LOV_OvertimePayMonth"
+    ListVOName="usgesspappmodule_MonthCodes1_1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="OvertimePayMonth"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="MonthId"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="MonthCode"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_EmployeeId"
+    ListVOName="usgesspappmodule_EmployeesAll1_1"
+    NullValueFlag="none"
+    MRUCount="0"
+    ComboRowCountHint="10">
+    <AttrArray Name="AttrNames">
+      <Item Value="EmployeeId"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="DerivedAttrNames">
+      <Item Value="Name"/>
+      <Item Value="Desg"/>
+    </AttrArray>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="EmpCode"/>
+      <Item Value="Name"/>
+      <Item Value="Desg"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Name"/>
+    </AttrArray>
+    <DisplayCriteria
+      Name="EmployeesAllCriteria"
+      Hint="showAndExecute"/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT /*+ FIRST_ROWS_11 */          
+       CustEmployeeOvertime.OVERTIME_ID,          
+       CustEmployeeOvertime.OVERTIME_DATE,          
+       CustEmployeeOvertime.OVERTIME_PAY_MONTH,          
+       CustEmployeeOvertime.EMPLOYEE_ID,          
+       CustEmployeeOvertime.OVERTIME_HOURS,          
+       CustEmployeeOvertime.OVERTIME_DEPT,          
+       CustEmployeeOvertime.CREATION_DATE,          
+       CustEmployeeOvertime.UPDATION_DATE,          
+       CustEmployeeOvertime.CREATED_BY,          
+       CustEmployeeOvertime.UPDATED_BY,          
+       CustEmployeeOvertime.VERSION_NUMBER,          
+       CustEmployeeOvertime.USER_IP_ADDRESS,     
+       CustEmployeeOvertime.PAY_YEAR,        
+       ea.name ,       
+       d.name desg        
+FROM  CUST_EMPLOYEE_OVERTIME CustEmployeeOvertime,        
+     uspr.employees_all ea ,       
+     USPR.USPR_COMMON_LOOKUPS_DETAIL d       
+where CustEmployeeOvertime.EMPLOYEE_ID = ea.emp_id       
+and ea.desg_id = d.lookup_detail_id   
+and CustEmployeeOvertime.OVERTIME_PAY_MONTH = (select pay_month from cust_incentive_params) 
+and CustEmployeeOvertime.PAY_YEAR = to_char(sysdate,'yyyy')]]></SQLQuery>
+  <EntityUsage
+    Name="CustEmployeeOvertime"
+    Entity="essp.usg.model.entity_objects.CustEmployeeOvertime"/>
+  <ViewAttribute
+    Name="OvertimeId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="OvertimeId"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="OVERTIME_ID"/>
+  <ViewAttribute
+    Name="OvertimeDate"
+    PrecisionRule="true"
+    EntityAttrName="OvertimeDate"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="OVERTIME_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOCustEmployeeOvertime.OvertimeDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OvertimePayMonth"
+    PrecisionRule="true"
+    EntityAttrName="OvertimePayMonth"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="OVERTIME_PAY_MONTH"
+    LOVName="LOV_OvertimePayMonth">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOCustEmployeeOvertime.OvertimePayMonth_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmployeeId"
+    PrecisionRule="true"
+    EntityAttrName="EmployeeId"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="EMPLOYEE_ID"
+    LOVName="LOV_EmployeeId">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOCustEmployeeOvertime.EmployeeId_LABEL"/>
+        <CONTROLTYPE
+          Value="input_text_lov"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OvertimeHours"
+    PrecisionRule="true"
+    EntityAttrName="OvertimeHours"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="OVERTIME_HOURS">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOCustEmployeeOvertime.OvertimeHours_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OvertimeDept"
+    PrecisionRule="true"
+    EntityAttrName="OvertimeDept"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="OVERTIME_DEPT">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOCustEmployeeOvertime.OvertimeDept_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOCustEmployeeOvertime.CreationDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="UpdationDate"
+    PrecisionRule="true"
+    EntityAttrName="UpdationDate"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="UPDATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="UpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedBy"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="UPDATED_BY"/>
+  <ViewAttribute
+    Name="VersionNumber"
+    PrecisionRule="true"
+    EntityAttrName="VersionNumber"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="VERSION_NUMBER"/>
+  <ViewAttribute
+    Name="UserIpAddress"
+    PrecisionRule="true"
+    EntityAttrName="UserIpAddress"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="USER_IP_ADDRESS"/>
+  <ViewAttribute
+    Name="PayYear"
+    PrecisionRule="true"
+    EntityAttrName="PayYear"
+    EntityUsage="CustEmployeeOvertime"
+    AliasName="PAY_YEAR"/>
+  <ViewAttribute
+    Name="Name"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="NAME"
+    Expression="NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Desg"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="300"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="DESG"
+    Expression="DESG"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="300"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewCriteria
+    Name="VOCustEmployeeOvertimeCriteria"
+    ViewObjectName="essp.usg.model.updatable.VOCustEmployeeOvertime"
+    Conjunction="AND">
+    <Properties Name="_Props">
+      <CustomProperties>
+        <Property
+          Name="autoExecute"
+          Value="true"/>
+        <Property
+          Name="mode"
+          Value="Basic"/>
+        <Property
+          Name="allowConjunctionOverride"
+          Value="true"/>
+        <Property
+          Name="showInList"
+          Value="true"/>
+        <Property
+          Name="displayOperators"
+          Value="Never"/>
+      </CustomProperties>
+    </Properties>
+    <ViewCriteriaRow
+      Name="VOCustEmployeeOvertimeCriteria_row_0"
+      UpperColumns="1">
+      <ViewCriteriaItem
+        Name="EmployeeId"
+        ViewAttribute="EmployeeId"
+        Operator="="
+        Conjunction="AND"
+        Value=":b_empid"
+        IsBindVarValue="true"
+        Required="Optional"/>
+    </ViewCriteriaRow>
+  </ViewCriteria>
+  <ClientRowInterface
+    Name="__rowClientInterface">
+    <Method
+      Name="overtimeExists"
+      MethodName="overtimeExists">
+      <Return
+        Name="_return_type_"
+        Type="int"/>
+      <Parameter
+        Name="employeeID"
+        Type="int"/>
+      <Parameter
+        Name="date"
+        Type="java.sql.Date"/>
+    </Method>
+  </ClientRowInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="essp.usg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

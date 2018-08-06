@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="tf_landing_page_tf_landing_page_ExecuteWithParams1PageDef" Package="essp.usg.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="VOEOLeavesPortal1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="VOEOLeavesPortal1Iterator" Refresh="never"/>
+  </executables>
+  <bindings>
+    <action IterBinding="VOEOLeavesPortal1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams" InstanceName="usgesspappmoduleDataControl.VOEOLeavesPortal1"
+            DataControl="usgesspappmoduleDataControl">
+      <NamedData NDName="v_emp_id" NDValue="#{sessionScope.sess_empcode}" NDType="java.lang.String"/>
+    </action>
+  </bindings>
+</pageDefinition>

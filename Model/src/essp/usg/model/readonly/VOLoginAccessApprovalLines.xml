@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOLoginAccessApprovalLines"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="essp.usg.model.readonly.VOLoginAccessApprovalLines_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[select ea.name requester_name,    
+ea.emp_id,    
+atype.type_name,    
+ao.access_object,    
+l.other_access_object,    
+l.req_line_id ,   
+h.approval_history_id, 
+l.justification 
+from xx_it_access_approval_history h,    
+xx_it_access_req_header rh,    
+xx_it_access_req_lines l,    
+uspr.employees_all ea,    
+ACCESS_TYPE atype,    
+ACCESS_OBJECTS ao    
+where  atype.type_id = l.access_type    
+and rh.req_header_id = h.req_header_id    
+and rh.status = 'ACTIVE'    
+and h.active = 'Y'    
+and ao.access_object_id = l.access_object    
+and l.req_header_id = rh.req_header_id    
+and h.user_id = ea.emp_code]]></SQLQuery>
+  <ViewAttribute
+    Name="RequesterName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="REQUESTER_NAME"
+    Expression="REQUESTER_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="EmpId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="9"
+    Scale="0"
+    Type="java.lang.Integer"
+    ColumnType="NUMBER"
+    AliasName="EMP_ID"
+    Expression="EMP_ID"
+    SQLType="INTEGER"/>
+  <ViewAttribute
+    Name="TypeName"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="100"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TYPE_NAME"
+    Expression="TYPE_NAME"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="100"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="AccessObject"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ACCESS_OBJECT"
+    Expression="ACCESS_OBJECT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="OtherAccessObject"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="500"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="OTHER_ACCESS_OBJECT"
+    Expression="OTHER_ACCESS_OBJECT"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="500"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ReqLineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="REQ_LINE_ID"
+    Expression="REQ_LINE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ApprovalHistoryId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="APPROVAL_HISTORY_ID"
+    Expression="APPROVAL_HISTORY_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Justification"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="1000"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="JUSTIFICATION"
+    Expression="JUSTIFICATION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="1000"/>
+    </DesignTime>
+  </ViewAttribute>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ReqLineId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="essp.usg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

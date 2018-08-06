@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="overtimePageDef1"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOCustEmployeeOvertime1" RangeSize="10" DataControl="usgesspappmoduleDataControl"
+              id="VOCustEmployeeOvertime1Iterator" RowCountThreshold="-1" ChangeEventPolicy="none"/>
+    <searchRegion Criteria="VOCustEmployeeOvertimeCriteria"
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  Binds="VOCustEmployeeOvertime1Iterator" id="VOCustEmployeeOvertimeCriteriaQuery"/>
+  </executables>
+  <bindings>
+    <action IterBinding="VOCustEmployeeOvertime1Iterator" id="CreateInsert"
+            InstanceName="usgesspappmoduleDataControl.VOCustEmployeeOvertime1" DataControl="usgesspappmoduleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <tree IterBinding="VOCustEmployeeOvertime1Iterator" id="VOCustEmployeeOvertime1">
+      <nodeDefinition DefName="essp.usg.model.updatable.VOCustEmployeeOvertime" Name="VOCustEmployeeOvertime10">
+        <AttrNames>
+          <Item Value="OvertimeId"/>
+          <Item Value="OvertimeDate"/>
+          <Item Value="OvertimePayMonth"/>
+          <Item Value="EmployeeId"/>
+          <Item Value="OvertimeHours"/>
+          <Item Value="OvertimeDept"/>
+          <Item Value="CreationDate"/>
+          <Item Value="UpdationDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="VersionNumber"/>
+          <Item Value="UserIpAddress"/>
+          <Item Value="Name"/>
+          <Item Value="Desg"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VOCustEmployeeOvertime1Iterator" id="EmployeeId">
+      <AttrNames>
+        <Item Value="EmployeeId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustEmployeeOvertime1Iterator" id="OvertimeDate">
+      <AttrNames>
+        <Item Value="OvertimeDate"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="VOCustEmployeeOvertime1Iterator" id="overtimeExists" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="overtimeExists" IsViewObjectMethod="false"
+                  DataControl="usgesspappmoduleDataControl"
+                  InstanceName="bindings.VOCustEmployeeOvertime1Iterator.currentRow" IsLocalObjectReference="true"
+                  ReturnName="data.usgesspappmoduleDataControl.methodResults.overtimeExists_overtimeExists_overtimeExists_result">
+      <NamedData NDName="employeeID" NDType="int"/>
+      <NamedData NDName="date" NDType="java.sql.Date"/>
+    </methodAction>
+    <action IterBinding="VOCustEmployeeOvertime1Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action id="Commit" DataControl="usgesspappmoduleDataControl" RequiresUpdateModel="true"
+            Action="commitTransaction"/>
+  </bindings>
+</pageDefinition>

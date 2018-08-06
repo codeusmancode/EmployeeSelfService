@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf_new_it_request">
+    <default-activity>check_session</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__8">
+      <managed-bean-name>ITAccess</managed-bean-name>
+      <managed-bean-class>essp.usg.view.ITAccess</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <router id="check_session">
+      <case id="__1">
+        <expression>#{sessionScope.sess_username != null}</expression>
+        <outcome>OKAY</outcome>
+      </case>
+      <case id="__2">
+        <expression>#{sessionScope.sess_username == null}</expression>
+        <outcome>NOT_OKAY</outcome>
+      </case>
+      <default-outcome>NOT_OKAY</default-outcome>
+    </router>
+    <method-call id="CreateInsert">
+      <method>#{bindings.CreateInsert.execute}</method>
+      <outcome>
+        <fixed-outcome>CreateInsert</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="internet_request_form">
+      <page>/views/internet_request_form.jsff</page>
+    </view>
+    <view id="invalid_login">
+      <page>/views/invalid_login.jsff</page>
+    </view>
+    <method-call id="submitITAccessReq">
+      <method>#{bindings.submitITAccessReq.execute}</method>
+      <outcome>
+        <fixed-outcome>submitITAccessReq</fixed-outcome>
+      </outcome>
+    </method-call>
+    <method-call id="Commit">
+      <method>#{bindings.Commit.execute}</method>
+      <outcome>
+        <fixed-outcome>Commit</fixed-outcome>
+      </outcome>
+    </method-call>
+    <task-flow-return id="taskFlowReturn1">
+      <outcome>
+        <name>taskFlowReturn1</name>
+      </outcome>
+    </task-flow-return>
+    <control-flow-rule id="__3">
+      <from-activity-id>check_session</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>OKAY</from-outcome>
+        <to-activity-id>CreateInsert</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__7">
+        <from-outcome>NOT_OKAY</from-outcome>
+        <to-activity-id>invalid_login</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>CreateInsert</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>CreateInsert</from-outcome>
+        <to-activity-id>internet_request_form</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__11">
+      <from-activity-id>internet_request_form</from-activity-id>
+      <control-flow-case id="__12">
+        <from-outcome>submitreq</from-outcome>
+        <to-activity-id>submitITAccessReq</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__15">
+      <from-activity-id>submitITAccessReq</from-activity-id>
+      <control-flow-case id="__16">
+        <from-outcome>submitITAccessReq</from-outcome>
+        <to-activity-id>Commit</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>Commit</from-activity-id>
+      <control-flow-case id="__18">
+        <from-outcome>Commit</from-outcome>
+        <to-activity-id>taskFlowReturn1</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

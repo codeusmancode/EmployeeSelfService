@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="request_statusPageDef"
+                Package="views">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ITReqHistory1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="ITReqHistory1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ITReqHistory1Iterator" id="ITReqHistory1">
+      <nodeDefinition DefName="essp.usg.model.readonly.ITReqHistory" Name="ITReqHistory10">
+        <AttrNames>
+          <Item Value="ApproverName"/>
+          <Item Value="Status"/>
+          <Item Value="ApprovalLevel"/>
+          <Item Value="Active"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

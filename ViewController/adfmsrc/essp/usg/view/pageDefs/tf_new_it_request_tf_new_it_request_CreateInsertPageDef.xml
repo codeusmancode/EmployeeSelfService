@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24"
+                id="tf_new_it_request_tf_new_it_request_CreateInsertPageDef" Package="essp.usg.view.pageDefs"
+                SkipValidation="true">
+  <parameters/>
+  <executables>
+    <iterator Binds="VOXxItAccessReqHeader1" RangeSize="25" DataControl="usgesspappmoduleDataControl"
+              id="VOXxItAccessReqHeader1Iterator"/>
+  </executables>
+  <bindings>
+    <action IterBinding="VOXxItAccessReqHeader1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" halign="center" layout="vertical">
+        <af:spacer width="10" height="25" id="s1"/>
+        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                             layout="vertical" halign="center">
+            <af:activeOutputText value="Pending Approvals" id="aot2" inlineStyle="color:white; font-size:17px;"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:panelHeader text="Pending Leave Approvals" id="ph1" inlineStyle="border:1px solid #e5e5e5;">
+            <f:facet name="context"/>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info">
+                <af:inputText value="#{bindings.EmpCode.inputValue}" label="#{bindings.EmpCode.hints.label}"
+                              required="#{bindings.EmpCode.hints.mandatory}"
+                              columns="#{bindings.EmpCode.hints.displayWidth}"
+                              maximumLength="#{bindings.EmpCode.hints.precision}"
+                              shortDesc="#{bindings.EmpCode.hints.tooltip}" id="it11" rendered="false">
+                    <f:validator binding="#{bindings.EmpCode.validator}"/>
+                    <af:convertNumber groupingUsed="false" pattern="#{bindings.EmpCode.format}"/>
+                </af:inputText>
+                <af:image id="i1" source="/imageservlet?emp_code=#{bindings.EmpCode.inputValue}"
+                          inlineStyle="width:72px;height:96px"/>
+            </f:facet>
+            <af:table value="#{bindings.VOHODLeavesPortal1.collectionModel}" var="row"
+                      rows="#{bindings.VOHODLeavesPortal1.rangeSize}"
+                      emptyText="#{bindings.VOHODLeavesPortal1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.VOHODLeavesPortal1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.VOHODLeavesPortal1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.VOHODLeavesPortal1.rangeSize}"
+                      filterModel="#{bindings.VOHODLeavesPortal1Query.queryDescriptor}" filterVisible="true"
+                      queryListener="#{bindings.VOHODLeavesPortal1Query.processQuery}" varStatus="vs" id="t1"
+                      autoHeightRows="7" styleClass="AFStretchWidth" columnStretching="column:c11">
+                <af:column id="c15" width="70">
+                    <af:button text="Approve" id="b1" action="#{HODBean.approveLeave}"/>
+                </af:column>
+                <af:column id="c16" width="70">
+                    <af:button text="Reject" id="b2" action="#{HODBean.rejectLeave}"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.SrNo.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.SrNo.label}" id="c1" rendered="false">
+                    <af:inputText value="#{row.bindings.SrNo.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.SrNo.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.SrNo.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.SrNo.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.SrNo.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.SrNo.tooltip}" id="it1">
+                        <f:validator binding="#{row.bindings.SrNo.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOHODLeavesPortal1.hints.SrNo.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.EmpId.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.EmpId.label}" id="c2" rendered="false">
+                    <af:inputText value="#{row.bindings.EmpId.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.EmpId.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.EmpId.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.EmpId.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.EmpId.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.EmpId.tooltip}" id="it2">
+                        <f:validator binding="#{row.bindings.EmpId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOHODLeavesPortal1.hints.EmpId.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.EmpCode.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.EmpCode.label}" id="c3" width="60">
+                    <af:inputText value="#{row.bindings.EmpCode.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.EmpCode.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.EmpCode.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.EmpCode.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.EmpCode.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.EmpCode.tooltip}" id="it3"
+                                  readOnly="true">
+                        <f:validator binding="#{row.bindings.EmpCode.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOHODLeavesPortal1.hints.EmpCode.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column id="c17" width="135" headerText="Employee Name">
+                    <af:outputText value="#{row.Name}" shortDesc="#{bindings.VOHODLeavesPortal1.hints.Name.tooltip}"
+                                   id="ot1"/>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.Leavetype.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.Leavetype.label}" id="c4" width="100">
+                    <af:inputText value="#{row.bindings.Leavetype.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.Leavetype.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.Leavetype.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.Leavetype.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.Leavetype.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.Leavetype.tooltip}" id="it4"
+                                  readOnly="true">
+                        <f:validator binding="#{row.bindings.Leavetype.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.FromDate.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.FromDate.label}" id="c5" width="150">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOHODLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.FromDate.value}"
+                                      id="id1">
+                            <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.FromDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl2" layout="horizontal">
+                        <af:inputDate value="#{row.bindings.FromDate.inputValue}"
+                                      label="#{bindings.VOHODLeavesPortal1.hints.FromDate.label}"
+                                      required="#{bindings.VOHODLeavesPortal1.hints.FromDate.mandatory}"
+                                      columns="#{bindings.VOHODLeavesPortal1.hints.FromDate.displayWidth}"
+                                      shortDesc="#{bindings.VOHODLeavesPortal1.hints.FromDate.tooltip}" id="id2"
+                                      readOnly="true">
+                            <f:validator binding="#{row.bindings.FromDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.FromDate.format}"/>
+                        </af:inputDate>
+                        <af:spacer width="10" height="10" id="s3"/>
+                        <af:outputText value="#{row.FromT}"
+                                       shortDesc="#{bindings.VOHODLeavesPortal1.hints.FromT.tooltip}" id="ot2"
+                                       rendered="#{row.LvTypeCode eq 'SHL' or row.LvTypeCode eq 'CLH' or row.LvTypeCode eq 'OD'}"/>
+                    </af:panelGroupLayout>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.ToDate.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.ToDate.label}" id="c6" width="150">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOHODLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.ToDate.value}"
+                                      id="id3">
+                            <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.ToDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:panelGroupLayout id="pgl3" layout="horizontal">
+                        <af:inputDate value="#{row.bindings.ToDate.inputValue}"
+                                      label="#{bindings.VOHODLeavesPortal1.hints.ToDate.label}"
+                                      required="#{bindings.VOHODLeavesPortal1.hints.ToDate.mandatory}"
+                                      columns="#{bindings.VOHODLeavesPortal1.hints.ToDate.displayWidth}"
+                                      shortDesc="#{bindings.VOHODLeavesPortal1.hints.ToDate.tooltip}" id="id4"
+                                      readOnly="true">
+                            <f:validator binding="#{row.bindings.ToDate.validator}"/>
+                            <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.ToDate.format}"/>
+                        </af:inputDate>
+                        <af:spacer width="10" height="10" id="s4"/>
+                        <af:outputText value="#{row.ToT}" shortDesc="#{bindings.VOHODLeavesPortal1.hints.ToT.tooltip}"
+                                       id="ot3"
+                                       rendered="#{row.LvTypeCode eq 'SHL' or row.LvTypeCode eq 'CLH' or row.LvTypeCode eq 'OD'}"/>
+                    </af:panelGroupLayout>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.label}" id="c7" rendered="false">
+                    <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.CreatedBy.tooltip}" id="it5">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.CreationDate.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.CreationDate.label}" id="c8"
+                           rendered="false">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOHODLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.CreationDate.value}"
+                                      id="id5">
+                            <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.CreationDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.CreationDate.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.CreationDate.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.CreationDate.displayWidth}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.CreationDate.tooltip}" id="id6">
+                        <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.CreationDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.TotLvs.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.TotLvs.label}" id="c9" width="40">
+                    <af:inputText value="#{row.bindings.TotLvs.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.TotLvs.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.TotLvs.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.TotLvs.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.TotLvs.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.TotLvs.tooltip}" id="it6"
+                                  readOnly="true">
+                        <f:validator binding="#{row.bindings.TotLvs.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOHODLeavesPortal1.hints.TotLvs.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.Approved.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.Approved.label}" id="c10" rendered="false">
+                    <af:inputText value="#{row.bindings.Approved.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.Approved.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.Approved.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.Approved.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.Approved.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.Approved.tooltip}" id="it7">
+                        <f:validator binding="#{row.bindings.Approved.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.Remarks.name}"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.Remarks.label}" id="c11" width="340">
+                    <af:inputText value="#{row.bindings.Remarks.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.Remarks.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.Remarks.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.Remarks.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.Remarks.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.Remarks.tooltip}" id="it8"
+                                  readOnly="true">
+                        <f:validator binding="#{row.bindings.Remarks.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.DeptId.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.DeptId.label}" id="c12" rendered="false">
+                    <af:inputText value="#{row.bindings.DeptId.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.DeptId.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.DeptId.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.DeptId.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.DeptId.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.DeptId.tooltip}" id="it9">
+                        <f:validator binding="#{row.bindings.DeptId.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.Cancel.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.Cancel.label}" id="c13" rendered="false">
+                    <af:inputText value="#{row.bindings.Cancel.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.Cancel.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.Cancel.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.Cancel.displayWidth}"
+                                  maximumLength="#{bindings.VOHODLeavesPortal1.hints.Cancel.precision}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.Cancel.tooltip}" id="it10">
+                        <f:validator binding="#{row.bindings.Cancel.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column sortProperty="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.name}" filterable="true"
+                           headerText="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.label}" id="c14"
+                           rendered="false">
+                    <f:facet name="filter">
+                        <af:inputDate value="#{bindings.VOHODLeavesPortal1Query.queryDescriptor.filterConjunctionCriterion.criterionMap.UpdatedDate.value}"
+                                      id="id7">
+                            <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.format}"/>
+                        </af:inputDate>
+                    </f:facet>
+                    <af:inputDate value="#{row.bindings.UpdatedDate.inputValue}"
+                                  label="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.label}"
+                                  required="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.mandatory}"
+                                  columns="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.displayWidth}"
+                                  shortDesc="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.tooltip}" id="id8">
+                        <f:validator binding="#{row.bindings.UpdatedDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOHODLeavesPortal1.hints.UpdatedDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+            </af:table>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:HODBean-->
+</ui:composition>

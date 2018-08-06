@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf_overtime_processing">
+    <default-activity>check_session1</default-activity>
+        <data-control-scope>
+            <shared/>
+        </data-control-scope>
+        <managed-bean id="__8">
+            <managed-bean-name>OvertimeProcessing</managed-bean-name>
+            <managed-bean-class>OvertimeProcessing</managed-bean-class>
+            <managed-bean-scope>request</managed-bean-scope>
+        </managed-bean>
+        <view id="invalid_login">
+            <page>/views/invalid_login.jsff</page>
+        </view>
+        <router id="check_session1">
+            <case id="__1">
+                <expression>#{sessionScope.sess_username != null}</expression>
+                <outcome>OKAY</outcome>
+            </case>
+            <case id="__2">
+                <expression>#{sessionScope.sess_username == null}</expression>
+                <outcome>NOT_OKAY</outcome>
+            </case>
+            <default-outcome>NOT_OKAY</default-outcome>
+        </router>
+        <view id="overtime_processing">
+            <page>/views/overtime_processing.jsff</page>
+        </view>
+        <method-call id="processOvertime">
+            <method>#{bindings.processOvertime.execute}</method>
+            <outcome>
+                <fixed-outcome>processOvertime</fixed-outcome>
+            </outcome>
+        </method-call>
+        <view id="incentive_amount_summary">
+            <page>/incentive_amount_summary.jsff</page>
+        </view>
+        <task-flow-return id="taskFlowReturn1">
+            <outcome>
+                <name>taskFlowReturn1</name>
+            </outcome>
+        </task-flow-return>
+        <control-flow-rule id="__3">
+            <from-activity-id>check_session1</from-activity-id>
+            <control-flow-case id="__4">
+                <from-outcome>NOT_OKAY</from-outcome>
+                <to-activity-id>invalid_login</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__5">
+                <from-outcome>OKAY</from-outcome>
+                <to-activity-id>overtime_processing</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__9">
+            <from-activity-id>overtime_processing</from-activity-id>
+            <control-flow-case id="__10">
+                <from-outcome>process</from-outcome>
+                <to-activity-id>processOvertime</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__19">
+                <from-outcome>overtime_entry</from-outcome>
+                <to-activity-id>taskFlowReturn1</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__11">
+                <from-outcome>view_incentive_summary</from-outcome>
+                <to-activity-id>incentive_amount_summary</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__15">
+            <from-activity-id>incentive_amount_summary</from-activity-id>
+            <control-flow-case id="__16">
+                <from-outcome>back</from-outcome>
+                <to-activity-id>overtime_processing</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__6">
+            <from-activity-id>processOvertime</from-activity-id>
+            <control-flow-case id="__7">
+                <from-outcome>processOvertime</from-outcome>
+                <to-activity-id>incentive_amount_summary</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

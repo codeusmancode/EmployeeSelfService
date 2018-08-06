@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.12.24" id="DataBindings"
+             SeparateXMLFiles="false" Package="essp.usg.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/views/ess_landing.jsf" usageId="essp_usg_view_ess_landingPageDef"/>
+    <page path="/tf_landing_page.xml#tf_landing_page@ExecuteWithParams"
+          usageId="essp_usg_view_tf_landing_page_tf_landing_page_ExecuteWithParamsPageDef"/>
+    <page path="/views/leave_app_form.jsff" usageId="essp_usg_view_leave_app_formPageDef"/>
+    <page path="/tf_landing_page.xml#tf_landing_page@ExecuteWithParams1"
+          usageId="essp_usg_view_tf_landing_page_tf_landing_page_ExecuteWithParams1PageDef"/>
+    <page path="/tf_landing_page.xml#tf_landing_page@new_leave_application_create_insert"
+          usageId="essp_usg_view_tf_landing_page_tf_landing_page_CreateInsertPageDef"/>
+    <page path="/views/hod_approvals.jsff" usageId="essp_usg_view_hod_approvalsPageDef"/>
+    <page path="/views/ess_hod_approvals.jsf" usageId="essp_usg_view_ess_hod_approvalsPageDef"/>
+    <page path="/tf_hod_approvals.xml#tf_hod_approvals@ExecuteWithParams"
+          usageId="essp_usg_view_tf_hod_approvals_tf_hod_approvals_ExecuteWithParamsPageDef"/>
+    <page path="/views/settings.jsf" usageId="essp_usg_view_settingsPageDef"/>
+    <page path="/tf_landing_page.xml#tf_landing_page@CreateInsert"
+          usageId="essp_usg_view_tf_landing_page_tf_landing_page_CreateInsertPageDef1"/>
+    <page path="/views/overtime.jsf" usageId="essp_usg_view_overtimePageDef"/>
+    <page path="/views/overtime.jsff" usageId="essp_usg_view_overtimePageDef1"/>
+    <page path="/tf_overtime.xml#tf_overtime@Execute" usageId="essp_usg_view_tf_overtime_tf_overtime_ExecutePageDef"/>
+    <page path="/views/overtime_processing.jsff" usageId="essp_usg_view_overtime_processingPageDef1"/>
+    <page path="/overtime_processing.jsf" usageId="essp_usg_view_overtime_processingPageDef11"/>
+    <page path="/WEB-INF/tf_overtime_processing.xml#tf_overtime_processing@processOvertime"
+          usageId="essp_usg_view_tf_overtime_processing_tf_overtime_processing_processOvertimePageDef"/>
+    <page path="/incentive_amount_summary.jsff" usageId="essp_usg_view_incentive_amount_summaryPageDef"/>
+    <page path="/views/internet_access_request.jsf" usageId="essp_usg_view_internet_access_requestPageDef"/>
+    <page path="/views/internet_request_form.jsff" usageId="essp_usg_view_internet_request_formPageDef"/>
+    <page path="/WEB-INF/tf_it_access.xml#tf_it_access@Execute"
+          usageId="essp_usg_view_tf_it_access_tf_it_access_ExecutePageDef"/>
+    <page path="/WEB-INF/tf_new_it_request.xml#tf_new_it_request@CreateInsert"
+          usageId="essp_usg_view_tf_new_it_request_tf_new_it_request_CreateInsertPageDef"/>
+    <page path="/WEB-INF/tf_new_it_request.xml#tf_new_it_request@submitITAccessReq"
+          usageId="essp_usg_view_tf_new_it_request_tf_new_it_request_submitITAccessReqPageDef"/>
+    <page path="/WEB-INF/tf_new_it_request.xml#tf_new_it_request@Commit"
+          usageId="essp_usg_view_tf_new_it_request_tf_new_it_request_CommitPageDef"/>
+    <page path="/views/request_status.jsff" usageId="essp_usg_view_request_statusPageDef"/>
+    <page path="/WEB-INF/tf_it_access.xml#tf_it_access@ExecuteWithParams"
+          usageId="essp_usg_view_tf_it_access_tf_it_access_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/tf_it_access.xml#tf_it_access@getActiveInternetReq"
+          usageId="essp_usg_view_tf_it_access_tf_it_access_getActiveInternetReqPageDef"/>
+    <page path="/views/dashboard.jsf" usageId="essp_usg_view_dashboardPageDef"/>
+    <page path="/views/dashboards.jsff" usageId="essp_usg_view_dashboardsPageDef"/>
+    <page path="/WEB-INF/tf-dashboard.xml#tf-dashboard@ExecuteWithParams"
+          usageId="essp_usg_view_tf_dashboard_tf_dashboard_ExecuteWithParamsPageDef"/>
+    <page path="/WEB-INF/tf-dashboard.xml#tf-dashboard@ExecuteWithParams1"
+          usageId="essp_usg_view_tf_dashboard_tf_dashboard_ExecuteWithParams1PageDef"/>
+    <page path="/tf_overtime.xml#tf_overtime@CreateInsert"
+          usageId="essp_usg_view_tf_overtime_tf_overtime_CreateInsertPageDef"/>
+    <page path="/WEB-INF/tf_it_access_approval.xml#tf_it_access_approval@ExecuteWithParams"
+          usageId="essp_usg_view_tf_it_access_approval_tf_it_access_approval_ExecuteWithParamsPageDef"/>
+    <page path="/views/internet_access_approval.jsff" usageId="essp_usg_view_internet_access_approvalPageDef"/>
+    <page path="/views/internet_access_approval.jsf" usageId="essp_usg_view_internet_access_approvalPageDef1"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="essp_usg_view_ess_landingPageDef" path="views.ess_landingPageDef"/>
+    <page id="essp_usg_view_tf_landing_page_tf_landing_page_ExecuteWithParamsPageDef"
+          path="essp.usg.view.pageDefs.tf_landing_page_tf_landing_page_ExecuteWithParamsPageDef"/>
+    <page id="essp_usg_view_leave_app_formPageDef" path="views.leave_app_formPageDef"/>
+    <page id="essp_usg_view_tf_landing_page_tf_landing_page_ExecuteWithParams1PageDef"
+          path="essp.usg.view.pageDefs.tf_landing_page_tf_landing_page_ExecuteWithParams1PageDef"/>
+    <page id="essp_usg_view_tf_landing_page_tf_landing_page_CreateInsertPageDef"
+          path="essp.usg.view.pageDefs.tf_landing_page_tf_landing_page_CreateInsertPageDef"/>
+    <page id="essp_usg_view_hod_approvalsPageDef" path="views.hod_approvalsPageDef"/>
+    <page id="essp_usg_view_ess_hod_approvalsPageDef" path="views.ess_hod_approvalsPageDef"/>
+    <page id="essp_usg_view_tf_hod_approvals_tf_hod_approvals_ExecuteWithParamsPageDef"
+          path="essp.usg.view.pageDefs.tf_hod_approvals_tf_hod_approvals_ExecuteWithParamsPageDef"/>
+    <page id="essp_usg_view_settingsPageDef" path="views.settingsPageDef"/>
+    <page id="essp_usg_view_tf_landing_page_tf_landing_page_CreateInsertPageDef1"
+          path="essp.usg.view.pageDefs.tf_landing_page_tf_landing_page_CreateInsertPageDef1"/>
+    <page id="essp_usg_view_overtimePageDef" path="views.overtimePageDef"/>
+    <page id="essp_usg_view_overtimePageDef1" path="views.overtimePageDef1"/>
+    <page id="essp_usg_view_tf_overtime_tf_overtime_ExecutePageDef"
+          path="essp.usg.view.pageDefs.tf_overtime_tf_overtime_ExecutePageDef"/>
+    <page id="essp_usg_view_overtime_processingPageDef" path="essp.usg.view.pageDefs.overtime_processingPageDef"/>
+    <page id="essp_usg_view_overtime_processingPageDef1" path="views.overtime_processingPageDef"/>
+    <page id="essp_usg_view_overtime_processingPageDef11" path="essp.usg.view.pageDefs.overtime_processingPageDef1"/>
+    <page id="essp_usg_view_tf_overtime_processing_tf_overtime_processing_processOvertimePageDef"
+          path="essp.usg.view.pageDefs.tf_overtime_processing_tf_overtime_processing_processOvertimePageDef"/>
+    <page id="essp_usg_view_incentive_amount_summaryPageDef"
+          path="essp.usg.view.pageDefs.incentive_amount_summaryPageDef"/>
+    <page id="essp_usg_view_internet_access_requestPageDef" path="views.internet_access_requestPageDef"/>
+    <page id="essp_usg_view_internet_request_formPageDef" path="views.internet_request_formPageDef"/>
+    <page id="essp_usg_view_tf_it_access_tf_it_access_ExecutePageDef"
+          path="essp.usg.view.pageDefs.tf_it_access_tf_it_access_ExecutePageDef"/>
+    <page id="essp_usg_view_tf_new_it_request_tf_new_it_request_CreateInsertPageDef"
+          path="essp.usg.view.pageDefs.tf_new_it_request_tf_new_it_request_CreateInsertPageDef"/>
+    <page id="essp_usg_view_tf_new_it_request_tf_new_it_request_submitITAccessReqPageDef"
+          path="essp.usg.view.pageDefs.tf_new_it_request_tf_new_it_request_submitITAccessReqPageDef"/>
+    <page id="essp_usg_view_tf_new_it_request_tf_new_it_request_CommitPageDef"
+          path="essp.usg.view.pageDefs.tf_new_it_request_tf_new_it_request_CommitPageDef"/>
+    <page id="essp_usg_view_request_statusPageDef" path="views.request_statusPageDef"/>
+    <page id="essp_usg_view_tf_it_access_tf_it_access_ExecuteWithParamsPageDef"
+          path="essp.usg.view.pageDefs.tf_it_access_tf_it_access_ExecuteWithParamsPageDef"/>
+    <page id="essp_usg_view_tf_it_access_tf_it_access_getActiveInternetReqPageDef"
+          path="essp.usg.view.pageDefs.tf_it_access_tf_it_access_getActiveInternetReqPageDef"/>
+    <page id="essp_usg_view_dashboardPageDef" path="views.dashboardPageDef"/>
+    <page id="essp_usg_view_dashboardsPageDef" path="views.dashboardsPageDef"/>
+    <page id="essp_usg_view_tf_dashboard_tf_dashboard_ExecuteWithParamsPageDef"
+          path="essp.usg.view.pageDefs.tf_dashboard_tf_dashboard_ExecuteWithParamsPageDef"/>
+    <page id="essp_usg_view_tf_dashboard_tf_dashboard_ExecuteWithParams1PageDef"
+          path="essp.usg.view.pageDefs.tf_dashboard_tf_dashboard_ExecuteWithParams1PageDef"/>
+    <page id="essp_usg_view_tf_overtime_tf_overtime_CreateInsertPageDef"
+          path="essp.usg.view.pageDefs.tf_overtime_tf_overtime_CreateInsertPageDef"/>
+    <page id="essp_usg_view_tf_it_access_approval_tf_it_access_approval_ExecuteWithParamsPageDef"
+          path="essp.usg.view.pageDefs.tf_it_access_approval_tf_it_access_approval_ExecuteWithParamsPageDef"/>
+    <page id="essp_usg_view_internet_access_approvalPageDef" path="views.internet_access_approvalPageDef"/>
+    <page id="essp_usg_view_internet_access_approvalPageDef1" path="views.internet_access_approvalPageDef1"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="usgesspappmoduleDataControl" Package="essp.usg.model.application_modules"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="usgesspappmoduleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

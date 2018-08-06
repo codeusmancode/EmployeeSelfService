@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOLeavesPortal"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full"
+  FetchSize="6"
+  QueryHint="FIRST_ROWS_6"
+  FetchMode="FETCH_AS_NEEDED"
+  RowClass="essp.usg.model.updatable.VOLeavesPortalRowImpl"
+  RowInterface="essp.usg.model.updatable.common.VOLeavesPortalRow">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Variable
+    Name="v_emp_id"
+    Kind="where"
+    Type="java.lang.String"/>
+  <ViewAccessor
+    Name="usgesspappmodule_LeaveTypes1_1"
+    ViewObjectName="essp.usg.model.readonly.LeaveTypes"
+    AMUsageName="usgesspappmodule"
+    ViewInstanceName="LeaveTypes1"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="usgesspappmodule_AMPM1_1"
+    ViewObjectName="essp.usg.model.readonly.AMPM"
+    AMUsageName="usgesspappmodule"
+    ViewInstanceName="AMPM1"
+    RowLevelBinds="true"/>
+  <ViewAccessor
+    Name="usgesspappmodule_FirstSecondHalf1_1"
+    ViewObjectName="essp.usg.model.readonly.FirstSecondHalf"
+    AMUsageName="usgesspappmodule"
+    ViewInstanceName="FirstSecondHalf1"
+    RowLevelBinds="true"/>
+  <ListBinding
+    Name="LOV_Leavetype"
+    ListVOName="usgesspappmodule_LeaveTypes1_1"
+    NullValueFlag="start"
+    NullValueId="${adfBundle['oracle.javatools.resourcebundle.SystemBundle']['NULL_VALUE_RESID']}"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="Leavetype"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="LvTpye"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="LeaveType"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ampm"
+    ListVOName="usgesspappmodule_AMPM1_1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ampm"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Ampm"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Ampm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_ampmTO"
+    ListVOName="usgesspappmodule_AMPM1_1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="ampmTO"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="Ampm"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="Ampm"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <ListBinding
+    Name="LOV_dayPart"
+    ListVOName="usgesspappmodule_FirstSecondHalf1_1"
+    NullValueFlag="none"
+    MRUCount="0">
+    <AttrArray Name="AttrNames">
+      <Item Value="dayPart"/>
+    </AttrArray>
+    <AttrArray Name="AttrExpressions"/>
+    <AttrArray Name="ListAttrNames">
+      <Item Value="FirstSecond"/>
+    </AttrArray>
+    <AttrArray Name="ListDisplayAttrNames">
+      <Item Value="FirstSecond"/>
+    </AttrArray>
+    <DisplayCriteria/>
+  </ListBinding>
+  <SQLQuery><![CDATA[SELECT /*+ FIRST_ROWS_6 */      
+       EOLeavesPortal.SR_NO,      
+       EOLeavesPortal.EMP_ID,      
+       EOLeavesPortal.EMP_CODE,      
+       EOLeavesPortal.LEAVETYPE,      
+       EOLeavesPortal.FROM_DATE,      
+       EOLeavesPortal.TO_DATE,   
+       to_char(EOLeavesPortal.FROM_DATE,'HH:MI AM') from_t, 
+       to_char(EOLeavesPortal.TO_DATE,'HH:MI AM') to_t, 
+       EOLeavesPortal.CREATED_BY,      
+       EOLeavesPortal.CREATION_DATE,      
+       EOLeavesPortal.TOT_LVS,      
+       EOLeavesPortal.APPROVED,      
+       EOLeavesPortal.REMARKS,      
+       EOLeavesPortal.DEPT_ID,      
+       EOLeavesPortal.CANCEL,      
+       EOLeavesPortal.UPDATED_DATE ,    
+       EOLeavesPortal.VERSION_NUMBER,  
+       case   
+        when nvl(approved,'N')='N' and nvl(cancel,'N') = 'N'  
+            then 'Pending'  
+        when nvl(approved,'N') = 'Y'  
+            then 'Approved'  
+        when nvl(approved,'N') = 'N' and nvl(cancel,'N') = 'Y'  
+            then 'Rejected'  
+            end  leave_status  
+FROM  LEAVES_PORTAL EOLeavesPortal     
+WHERE ( (EOLeavesPortal.EMP_ID = :v_emp_id ) )   
+order by EOLeavesPortal.CREATION_DATE desc]]></SQLQuery>
+  <EntityUsage
+    Name="EOLeavesPortal"
+    Entity="essp.usg.model.entity_objects.EOLeavesPortal"/>
+  <ViewAttribute
+    Name="SrNo"
+    PrecisionRule="true"
+    EntityAttrName="SrNo"
+    EntityUsage="EOLeavesPortal"
+    AliasName="SR_NO"/>
+  <ViewAttribute
+    Name="EmpId"
+    PrecisionRule="true"
+    EntityAttrName="EmpId"
+    EntityUsage="EOLeavesPortal"
+    AliasName="EMP_ID"/>
+  <ViewAttribute
+    Name="EmpCode"
+    PrecisionRule="true"
+    EntityAttrName="EmpCode"
+    EntityUsage="EOLeavesPortal"
+    AliasName="EMP_CODE"/>
+  <ViewAttribute
+    Name="Leavetype"
+    PrecisionRule="true"
+    EntityAttrName="Leavetype"
+    EntityUsage="EOLeavesPortal"
+    AliasName="LEAVETYPE"
+    LOVName="LOV_Leavetype">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOLeavesPortal.Leavetype_LABEL"/>
+        <DISPLAYWIDTH
+          Value="20"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FromDate"
+    PrecisionRule="true"
+    EntityAttrName="FromDate"
+    EntityUsage="EOLeavesPortal"
+    AliasName="FROM_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOLeavesPortal.FromDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ToDate"
+    PrecisionRule="true"
+    EntityAttrName="ToDate"
+    EntityUsage="EOLeavesPortal"
+    AliasName="TO_DATE">
+    <Properties>
+      <SchemaBasedProperties>
+        <LABEL
+          ResId="essp.usg.model.updatable.VOLeavesPortal.ToDate_LABEL"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="FromT"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="FROM_T"
+    Expression="FROM_T"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ToT"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TO_T"
+    Expression="TO_T"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="EOLeavesPortal"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="EOLeavesPortal"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="TotLvs"
+    PrecisionRule="true"
+    EntityAttrName="TotLvs"
+    EntityUsage="EOLeavesPortal"
+    AliasName="TOT_LVS"/>
+  <ViewAttribute
+    Name="Approved"
+    PrecisionRule="true"
+    EntityAttrName="Approved"
+    EntityUsage="EOLeavesPortal"
+    AliasName="APPROVED"/>
+  <ViewAttribute
+    Name="Remarks"
+    PrecisionRule="true"
+    EntityAttrName="Remarks"
+    EntityUsage="EOLeavesPortal"
+    AliasName="REMARKS"/>
+  <ViewAttribute
+    Name="DeptId"
+    PrecisionRule="true"
+    EntityAttrName="DeptId"
+    EntityUsage="EOLeavesPortal"
+    AliasName="DEPT_ID"/>
+  <ViewAttribute
+    Name="Cancel"
+    PrecisionRule="true"
+    EntityAttrName="Cancel"
+    EntityUsage="EOLeavesPortal"
+    AliasName="CANCEL"/>
+  <ViewAttribute
+    Name="UpdatedDate"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedDate"
+    EntityUsage="EOLeavesPortal"
+    AliasName="UPDATED_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="VersionNumber"
+    PrecisionRule="true"
+    EntityAttrName="VersionNumber"
+    EntityUsage="EOLeavesPortal"
+    AliasName="VERSION_NUMBER"/>
+  <ViewAttribute
+    Name="LeaveStatus"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="8"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="LEAVE_STATUS"
+    Expression="LEAVE_STATUS"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="8"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="fromHours"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="toHours"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="fromMin"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="toMin"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="oracle.jbo.domain.Number"
+    ColumnType="NUMBER"
+    AliasName="VIEW_ATTR"
+    SQLType="NUMERIC"
+    DefaultValue="0"/>
+  <ViewAttribute
+    Name="ampm"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_ampm"
+    DefaultValue="AM">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ampmTO"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_ampmTO"
+    DefaultValue="AM">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="dayPart"
+    IsSelected="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="255"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="VIEW_ATTR"
+    SQLType="VARCHAR"
+    LOVName="LOV_dayPart">
+    <Properties>
+      <SchemaBasedProperties>
+        <CONTROLTYPE
+          Value="choice"/>
+      </SchemaBasedProperties>
+    </Properties>
+  </ViewAttribute>
+  <ClientRowInterface
+    Name="__rowClientInterface">
+    <Method
+      Name="submitLeaveAction"
+      MethodName="submitLeaveAction">
+      <Return
+        Name="_return_type_"
+        Type="int"/>
+    </Method>
+    <Method
+      Name="submitLeaveAction"
+      MethodName="submitLeaveAction">
+      <Return
+        Name="_return_type_"
+        Type="int"/>
+    </Method>
+  </ClientRowInterface>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="essp.usg.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

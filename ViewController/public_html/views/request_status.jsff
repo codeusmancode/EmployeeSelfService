@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" layout="vertical">
+        <af:spacer width="10" height="25" id="s2"/>
+        <af:panelGroupLayout id="pgl3" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                             layout="horizontal" halign="center">
+            <af:button text="New Internet Request" id="b1" action="NEW" disabled="#{sessionScope.active_req gt 0}"/>
+            <af:activeOutputText value="Internet Access Approval Status" id="aot1" inlineStyle="color:white; font-size:17px;"/>
+        </af:panelGroupLayout>
+        <af:listView value="#{bindings.ITReqHistory1.collectionModel}" var="item"
+                     emptyText="#{bindings.ITReqHistory1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                     fetchSize="#{bindings.ITReqHistory1.rangeSize}" id="lv1">
+            <af:listItem id="li1"
+                         inlineStyle="#{item.bindings.Active.inputValue eq 'Y'? 'background-color:green':'background-color:#e5e5e5'}">
+                <af:panelGroupLayout layout="horizontal" id="pgl2">
+                    <f:facet name="separator">
+                        <af:spacer width="10" id="s1"/>
+                    </f:facet>
+                    <af:outputFormatted value="#{item.bindings.ApproverName.inputValue}" id="of1"/>
+                    <af:outputFormatted value="#{item.bindings.Status.inputValue}" id="of2"/>
+                </af:panelGroupLayout>
+            </af:listItem>
+        </af:listView>
+    </af:panelGroupLayout>
+</ui:composition>

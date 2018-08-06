@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOCustIncentiveHourlyRate"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  SelectListFlags="1"
+  FromListFlags="1"
+  WhereFlags="1"
+  BindingStyle="OracleName"
+  CustomQuery="false"
+  SelectAllAttributes="false"
+  PageIterMode="Full"
+  RowClass="essp.usg.model.updatable.VOCustIncentiveHourlyRateRowImpl">
+  <DesignTime>
+    <Attr Name="_codeGenFlag2" Value="Access"/>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <EntityUsage
+    Name="CustIncentiveHourlyRate"
+    Entity="essp.usg.model.entity_objects.CustIncentiveHourlyRate"/>
+  <ViewAttribute
+    Name="RateId"
+    IsNotNull="true"
+    PrecisionRule="true"
+    EntityAttrName="RateId"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="RATE_ID"/>
+  <ViewAttribute
+    Name="Rate"
+    PrecisionRule="true"
+    EntityAttrName="Rate"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="RATE"/>
+  <ViewAttribute
+    Name="MonthCode"
+    PrecisionRule="true"
+    EntityAttrName="MonthCode"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="MONTH_CODE"/>
+  <ViewAttribute
+    Name="CalculationDate"
+    PrecisionRule="true"
+    EntityAttrName="CalculationDate"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="CALCULATION_DATE"/>
+  <ViewAttribute
+    Name="Active"
+    PrecisionRule="true"
+    EntityAttrName="Active"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="ACTIVE"/>
+  <ViewAttribute
+    Name="CreationDate"
+    PrecisionRule="true"
+    EntityAttrName="CreationDate"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="CREATION_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="UpdateDate"
+    PrecisionRule="true"
+    EntityAttrName="UpdateDate"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="UPDATE_DATE"
+    IsUpdateable="false"/>
+  <ViewAttribute
+    Name="CreatedBy"
+    PrecisionRule="true"
+    EntityAttrName="CreatedBy"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="CREATED_BY"/>
+  <ViewAttribute
+    Name="UpdatedBy"
+    PrecisionRule="true"
+    EntityAttrName="UpdatedBy"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="UPDATED_BY"/>
+  <ViewAttribute
+    Name="VersionNumber"
+    PrecisionRule="true"
+    EntityAttrName="VersionNumber"
+    EntityUsage="CustIncentiveHourlyRate"
+    AliasName="VERSION_NUMBER"/>
+</ViewObject>

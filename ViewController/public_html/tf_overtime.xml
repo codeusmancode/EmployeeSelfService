@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf_overtime">
+    <default-activity>check_session1</default-activity>
+        <data-control-scope>
+            <shared/>
+        </data-control-scope>
+        <managed-bean id="__8">
+            <managed-bean-name>HODBean</managed-bean-name>
+            <managed-bean-class>essp.usg.view.HODApprovals</managed-bean-class>
+            <managed-bean-scope>request</managed-bean-scope>
+        </managed-bean>
+        <managed-bean id="__9">
+            <managed-bean-name>OvertimeBean</managed-bean-name>
+            <managed-bean-class>essp.usg.view.OvertimeBean</managed-bean-class>
+            <managed-bean-scope>request</managed-bean-scope>
+        </managed-bean>
+        <view id="invalid_login">
+            <page>/views/invalid_login.jsff</page>
+        </view>
+        <router id="check_session1">
+            <case id="__1">
+                <expression>#{sessionScope.sess_username != null}</expression>
+                <outcome>OKAY</outcome>
+            </case>
+            <case id="__2">
+                <expression>#{sessionScope.sess_username == null}</expression>
+                <outcome>NOT_OKAY</outcome>
+            </case>
+            <default-outcome>NOT_OKAY</default-outcome>
+        </router>
+        <view id="overtime">
+            <page>/views/overtime.jsff</page>
+        </view>
+        <method-call id="Execute">
+            <method>#{bindings.Execute.execute}</method>
+            <outcome>
+                <fixed-outcome>Execute</fixed-outcome>
+            </outcome>
+        </method-call>
+        <method-call id="getDefaultOvertimeValues">
+            <method>#{OvertimeBean.autoOvertimeRecValues}</method>
+            <outcome>
+                <fixed-outcome>values_assigned</fixed-outcome>
+            </outcome>
+        </method-call>
+        <task-flow-call id="tf_overtime_processing">
+            <task-flow-reference>
+                <document>/WEB-INF/tf_overtime_processing.xml</document>
+                <id>tf_overtime_processing</id>
+            </task-flow-reference>
+        </task-flow-call>
+        <router id="check_resp">
+            <case id="__10">
+                <expression> #{sessionScope.OVERTIME_SUPERUSER  == sessionScope.sess_username}</expression>
+                <outcome>have</outcome>
+            </case>
+            <case id="__11">
+                <expression> #{sessionScope.OVERTIME_SUPERUSER  != sessionScope.sess_username}</expression>
+                <outcome>not_have</outcome>
+            </case>
+            <default-outcome>not_have</default-outcome>
+        </router>
+        <view id="responsibility_not_found">
+            <page>/views/responsibility_not_found.jsff</page>
+        </view>
+        <method-call id="CreateInsert">
+            <method>#{bindings.CreateInsert.execute}</method>
+            <outcome>
+                <fixed-outcome>CreateInsert</fixed-outcome>
+            </outcome>
+        </method-call>
+        <control-flow-rule id="__3">
+            <from-activity-id>check_session1</from-activity-id>
+            <control-flow-case id="__4">
+                <from-outcome>NOT_OKAY</from-outcome>
+                <to-activity-id>invalid_login</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__5">
+                <from-outcome>OKAY</from-outcome>
+                <to-activity-id>check_resp</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__12">
+            <from-activity-id>getDefaultOvertimeValues</from-activity-id>
+            <control-flow-case id="__13">
+                <to-activity-id>overtime</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__6">
+            <from-activity-id>overtime</from-activity-id>
+            <control-flow-case id="__7">
+                <from-outcome>process_overtime</from-outcome>
+                <to-activity-id>tf_overtime_processing</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__14">
+            <from-activity-id>check_resp</from-activity-id>
+            <control-flow-case id="__15">
+                <from-outcome>have</from-outcome>
+                <to-activity-id>Execute</to-activity-id>
+            </control-flow-case>
+            <control-flow-case id="__21">
+                <from-outcome>not_have</from-outcome>
+                <to-activity-id>responsibility_not_found</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__16">
+            <from-activity-id>Execute</from-activity-id>
+            <control-flow-case id="__17">
+                <from-outcome>Execute</from-outcome>
+                <to-activity-id>CreateInsert</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <control-flow-rule id="__18">
+            <from-activity-id>CreateInsert</from-activity-id>
+            <control-flow-case id="__19">
+                <from-outcome>CreateInsert</from-outcome>
+                <to-activity-id>getDefaultOvertimeValues</to-activity-id>
+            </control-flow-case>
+        </control-flow-rule>
+        <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

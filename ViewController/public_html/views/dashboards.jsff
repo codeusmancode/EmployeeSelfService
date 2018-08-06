@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns:dvt="http://xmlns.oracle.com/dss/adf/faces">
+  <af:panelDashboard id="pd1" rowHeight="400px">
+    <af:panelBox text="Casual Leaves" id="pb1">
+      <f:facet name="toolbar"/>
+      <dvt:barChart selectionListener="#{bindings.DashboardCasualLeave1.collectionModel.makeCurrent}"
+                    dataSelection="single" id="barChart1" var="row"
+                    value="#{bindings.DashboardCasualLeave1.collectionModel}" zoomAndScroll="live">
+        <dvt:chartLegend rendered="false" id="cl1"/>
+        <f:facet name="dataStamp">
+          <dvt:chartDataItem id="di1" series="#{bindings.DashboardCasualLeave1.hints.Availed.label}"
+                             value="#{row.Availed}" group="#{row.Name}"/>
+        </f:facet>
+      </dvt:barChart>
+      <af:componentDragSource/>
+    </af:panelBox>
+    <af:panelBox text="Casual Leaves Details" id="pb2">
+      <f:facet name="toolbar"/>
+      <af:componentDragSource>
+        <af:componentDragSource>
+          <af:componentDragSource/>
+        </af:componentDragSource>
+      </af:componentDragSource>
+      <af:table value="#{bindings.DashboardCasualLeaveDetail1.collectionModel}" var="row"
+                rows="#{bindings.DashboardCasualLeaveDetail1.rangeSize}"
+                emptyText="#{bindings.DashboardCasualLeaveDetail1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                rowBandingInterval="0"
+                selectedRowKeys="#{bindings.DashboardCasualLeaveDetail1.collectionModel.selectedRow}"
+                selectionListener="#{bindings.DashboardCasualLeaveDetail1.collectionModel.makeCurrent}"
+                rowSelection="single" fetchSize="#{bindings.DashboardCasualLeaveDetail1.rangeSize}" id="t1">
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.label}" id="c1">
+          <af:inputText value="#{row.bindings.SrNo.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.tooltip}" id="it1">
+            <f:validator binding="#{row.bindings.SrNo.validator}"/>
+            <af:convertNumber groupingUsed="false" pattern="#{bindings.DashboardCasualLeaveDetail1.hints.SrNo.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.label}" id="c2">
+          <af:inputText value="#{row.bindings.EmpCode.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.tooltip}" id="it2">
+            <f:validator binding="#{row.bindings.EmpCode.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.DashboardCasualLeaveDetail1.hints.EmpCode.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.FromDate.label}" id="c3">
+          <af:inputDate value="#{row.bindings.FromDate.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.FromDate.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.FromDate.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.FromDate.displayWidth}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.FromDate.tooltip}" id="id1">
+            <f:validator binding="#{row.bindings.FromDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.DashboardCasualLeaveDetail1.hints.FromDate.format}"/>
+          </af:inputDate>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.Leavetype.label}" id="c4">
+          <af:inputText value="#{row.bindings.Leavetype.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.Leavetype.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.Leavetype.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.Leavetype.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.Leavetype.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.Leavetype.tooltip}" id="it3">
+            <f:validator binding="#{row.bindings.Leavetype.validator}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.ToDate.label}" id="c5">
+          <af:inputDate value="#{row.bindings.ToDate.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.ToDate.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.ToDate.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.ToDate.displayWidth}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.ToDate.tooltip}" id="id2">
+            <f:validator binding="#{row.bindings.ToDate.validator}"/>
+            <af:convertDateTime pattern="#{bindings.DashboardCasualLeaveDetail1.hints.ToDate.format}"/>
+          </af:inputDate>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.label}" id="c6">
+          <af:inputText value="#{row.bindings.TotLvs.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.tooltip}" id="it4">
+            <f:validator binding="#{row.bindings.TotLvs.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.DashboardCasualLeaveDetail1.hints.TotLvs.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.label}" id="c7">
+          <af:inputText value="#{row.bindings.EmpId.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.tooltip}" id="it5">
+            <f:validator binding="#{row.bindings.EmpId.validator}"/>
+            <af:convertNumber groupingUsed="false"
+                              pattern="#{bindings.DashboardCasualLeaveDetail1.hints.EmpId.format}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.Approved.label}" id="c8">
+          <af:inputText value="#{row.bindings.Approved.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.Approved.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.Approved.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.Approved.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.Approved.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.Approved.tooltip}" id="it6">
+            <f:validator binding="#{row.bindings.Approved.validator}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.Cancel.label}" id="c9">
+          <af:inputText value="#{row.bindings.Cancel.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.Cancel.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.Cancel.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.Cancel.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.Cancel.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.Cancel.tooltip}" id="it7">
+            <f:validator binding="#{row.bindings.Cancel.validator}"/>
+          </af:inputText>
+        </af:column>
+        <af:column headerText="#{bindings.DashboardCasualLeaveDetail1.hints.LeaveStatus.label}" id="c10">
+          <af:inputText value="#{row.bindings.LeaveStatus.inputValue}"
+                        label="#{bindings.DashboardCasualLeaveDetail1.hints.LeaveStatus.label}"
+                        required="#{bindings.DashboardCasualLeaveDetail1.hints.LeaveStatus.mandatory}"
+                        columns="#{bindings.DashboardCasualLeaveDetail1.hints.LeaveStatus.displayWidth}"
+                        maximumLength="#{bindings.DashboardCasualLeaveDetail1.hints.LeaveStatus.precision}"
+                        shortDesc="#{bindings.DashboardCasualLeaveDetail1.hints.LeaveStatus.tooltip}" id="it8">
+            <f:validator binding="#{row.bindings.LeaveStatus.validator}"/>
+          </af:inputText>
+        </af:column>
+      </af:table>
+    </af:panelBox>
+    <af:panelBox text="PanelBox3" id="pb3">
+      <f:facet name="toolbar"/>
+      <af:componentDragSource/>
+    </af:panelBox>
+  </af:panelDashboard>
+</ui:composition>

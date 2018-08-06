@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="vertical">
+  <af:spacer width="10" height="25" id="s1"/>
+        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                             layout="vertical" halign="center">
+            <af:activeOutputText value="Process Finishing Incentive" id="aot2" inlineStyle="color:white; font-size:17px;"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:panelHeader text="Process" id="ph1">
+            <f:facet name="context">
+                <af:inputText label="Amount" id="it1" value="#{pageFlowScope.amount}" autoSubmit="true"
+                              required="false" showRequired="false" requiredMessageDetail="Aggrigative Incentive Amount"/>
+                <af:button text="Get Excel" id="b1" inlineStyle="width:120px">
+                    <af:exportCollectionActionListener type="excelHTML" exportedId="pc1:t1"
+                                                       filename="finishing_incentive_details" title="detials"/>
+                </af:button>
+                <af:button text="Distribute Amount" id="b2" action="process" inlineStyle="width:120px"/>
+                <af:button text="View Summary" id="b3" action="view_incentive_summary" inlineStyle="width:120px"/>
+                <af:button text="Back" id="b4" action="overtime_entry" inlineStyle="width:120px"/>
+            </f:facet>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend"/>
+            <f:facet name="info"/>
+            <af:panelCollection id="pc1" styleClass="AFStretchWidth">
+                <f:facet name="menus"/>
+                <f:facet name="toolbar"/>
+                <af:table value="#{bindings.EmployeeOvertimeDetail1.collectionModel}" var="row"
+                          rows="#{bindings.EmployeeOvertimeDetail1.rangeSize}"
+                          emptyText="#{bindings.EmployeeOvertimeDetail1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                          rowBandingInterval="0"
+                          selectedRowKeys="#{bindings.EmployeeOvertimeDetail1.collectionModel.selectedRow}"
+                          selectionListener="#{bindings.EmployeeOvertimeDetail1.collectionModel.makeCurrent}"
+                          rowSelection="single" fetchSize="#{bindings.EmployeeOvertimeDetail1.rangeSize}" id="t1"
+                          autoHeightRows="14">
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.OvertimeId.label}" id="c1"
+                               rendered="false">
+                        <af:outputText value="#{row.OvertimeId}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.OvertimeId.tooltip}"
+                                       id="ot1">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmployeeOvertimeDetail1.hints.OvertimeId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.EmployeeId.label}" id="c2">
+                        <af:outputText value="#{row.EmployeeId}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.EmployeeId.tooltip}"
+                                       id="ot2">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmployeeOvertimeDetail1.hints.EmployeeId.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.Name.label}" id="c3">
+                        <af:outputText value="#{row.Name}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.Name.tooltip}" id="ot3"/>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.OvertimePayMonth.label}" id="c4">
+                        <af:outputText value="#{row.OvertimePayMonth}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.OvertimePayMonth.tooltip}"
+                                       id="ot4">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmployeeOvertimeDetail1.hints.OvertimePayMonth.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.OvertimeDate.label}" id="c5">
+                        <af:outputText value="#{row.OvertimeDate}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.OvertimeDate.tooltip}"
+                                       id="ot5">
+                            <af:convertDateTime pattern="#{bindings.EmployeeOvertimeDetail1.hints.OvertimeDate.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.Hr.label}" id="c6">
+                        <af:outputText value="#{row.Hr}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.Hr.tooltip}" id="ot6">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmployeeOvertimeDetail1.hints.Hr.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.Aw.label}" id="c7">
+                        <af:outputText value="#{row.Aw}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.Aw.tooltip}" id="ot7">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmployeeOvertimeDetail1.hints.Aw.format}"/>
+                        </af:outputText>
+                    </af:column>
+                    <af:column headerText="#{bindings.EmployeeOvertimeDetail1.hints.MinHours.label}" id="c8">
+                        <af:outputText value="#{row.MinHours}"
+                                       shortDesc="#{bindings.EmployeeOvertimeDetail1.hints.MinHours.tooltip}" id="ot8">
+                            <af:convertNumber groupingUsed="false"
+                                              pattern="#{bindings.EmployeeOvertimeDetail1.hints.MinHours.format}"/>
+                        </af:outputText>
+                    </af:column>
+                </af:table>
+                <f:facet name="statusbar"/>
+            </af:panelCollection>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+</ui:composition>

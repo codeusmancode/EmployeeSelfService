@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <af:panelGroupLayout id="pgl1" layout="vertical" halign="center">
+        <af:spacer width="10" height="25" id="s1"/>
+        <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                             layout="vertical" halign="center">
+            <af:activeOutputText value="Finishing Incentive" id="aot2" inlineStyle="color:white; font-size:17px;"/>
+        </af:panelGroupLayout>
+        <af:spacer width="10" height="10" id="s2"/>
+        <af:panelHeader text="Finishing Incentive" id="ph1">
+            <f:facet name="context">
+                <af:panelGroupLayout id="pgl2" layout="horizontal">
+                    <af:inputDate label="Date:" id="id4" value="#{sessionScope.overtime_date}"
+                                  valueChangeListener="#{OvertimeBean.overtimeDateChanged}" autoSubmit="true"/>
+                    <af:selectOneChoice label="Pay Month" id="smc1" selectAllVisible="false"
+                                        value="#{sessionScope.pay_month}"
+                                        valueChangeListener="#{OvertimeBean.payMonthChanged}" autoSubmit="true">
+                        <af:selectItem label="JAN" value="1" id="si1"/>
+                        <af:selectItem label="FEB" value="2" id="si2"/>
+                        <af:selectItem label="MAR" value="3" id="si3"/>
+                        <af:selectItem label="APR" value="4" id="si4"/>
+                        <af:selectItem label="MAY" value="5" id="si5"/>
+                        <af:selectItem label="JUN" value="6" id="si6"/>
+                        <af:selectItem label="JUL" value="7" id="si7"/>
+                        <af:selectItem label="AUG" value="8" id="si8"/>
+                        <af:selectItem label="SEP" value="9" id="si9"/>
+                        <af:selectItem label="OCT" value="10" id="si10"/>
+                        <af:selectItem label="NOV" value="11" id="si11"/>
+                        <af:selectItem label="DEC" value="12" id="si12"/>
+                    </af:selectOneChoice>
+                    <af:button text="Initialize"
+                               disabled="#{!bindings.CreateInsert1.enabled}" id="b3" actionListener="#{OvertimeBean.initActionListener}"/>
+                    <af:query id="qryId1" headerText="Search" disclosed="true"
+                              value="#{bindings.VOCustEmployeeOvertimeCriteriaQuery.queryDescriptor}"
+                              model="#{bindings.VOCustEmployeeOvertimeCriteriaQuery.queryModel}"
+                              queryListener="#{bindings.VOCustEmployeeOvertimeCriteriaQuery.processQuery}"
+                              queryOperationListener="#{bindings.VOCustEmployeeOvertimeCriteriaQuery.processQueryOperation}"
+                              displayMode="simple" saveQueryMode="hidden"/>
+                    <af:button text="Save" id="b1"
+                               action="#{OvertimeBean.commitOvertime}">
+                            <af:setPropertyListener from="#{bindings.EmployeeId.inputValue}"
+                                                    to="#{pageFlowScope.employee_id}" type="action"/>
+                        <af:setPropertyListener from="#{bindings.OvertimeDate.inputValue}"
+                                                to="#{pageFlowScope.overtime_date}" type="action"/>
+                        
+                    </af:button>
+                    <af:button text="Update" id="b4" action="#{OvertimeBean.updateRec}"/>
+                </af:panelGroupLayout>
+            </f:facet>
+            <f:facet name="toolbar"/>
+            <f:facet name="menuBar"/>
+            <f:facet name="legend">
+                <af:button text="Process" id="b2" action="process_overtime"/>
+            </f:facet>
+            <f:facet name="info"/>
+            <af:table value="#{bindings.VOCustEmployeeOvertime1.collectionModel}" var="row"
+                      rows="#{bindings.VOCustEmployeeOvertime1.rangeSize}"
+                      emptyText="#{bindings.VOCustEmployeeOvertime1.viewable ? 'No data to display.' : 'Access Denied.'}"
+                      rowBandingInterval="0"
+                      selectedRowKeys="#{bindings.VOCustEmployeeOvertime1.collectionModel.selectedRow}"
+                      selectionListener="#{bindings.VOCustEmployeeOvertime1.collectionModel.makeCurrent}"
+                      rowSelection="single" fetchSize="#{bindings.VOCustEmployeeOvertime1.rangeSize}" id="t1"
+                      autoHeightRows="10" styleClass="AFStretchWidth" partialTriggers="::b3 ::b1 ::qryId1"
+                      contentDelivery="immediate" binding="#{OvertimeBean.overtimeTable}" displayRow="selected"
+                      clientComponent="true">
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.label}" id="c1"
+                           rendered="false">
+                    <af:inputText value="#{row.bindings.OvertimeId.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.tooltip}" id="it1">
+                        <f:validator binding="#{row.bindings.OvertimeId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeId.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDate.label}" id="c2">
+                    <af:inputDate value="#{row.bindings.OvertimeDate.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDate.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDate.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDate.displayWidth}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDate.tooltip}" id="id1"
+                                  autoSubmit="true">
+                        <f:validator binding="#{row.bindings.OvertimeDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.OvertimePayMonth.label}" id="c3">
+                    <af:selectOneChoice value="#{row.bindings.OvertimePayMonth.inputValue}"
+                                        label="#{row.bindings.OvertimePayMonth.label}"
+                                        required="#{bindings.VOCustEmployeeOvertime1.hints.OvertimePayMonth.mandatory}"
+                                        shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.OvertimePayMonth.tooltip}"
+                                        id="soc1" autoSubmit="true">
+                        <f:selectItems value="#{row.bindings.OvertimePayMonth.items}" id="si13"/>
+                        <f:validator binding="#{row.bindings.OvertimePayMonth.validator}"/>
+                    </af:selectOneChoice>
+                </af:column>
+                <af:column id="c13" headerText="Employee Name">
+                    <af:outputText value="#{row.Name}"
+                                   shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.Name.tooltip}" id="ot2"/>
+                </af:column>
+                <af:column id="c14" headerText="Designation">
+                    <af:outputText value="#{row.Desg}"
+                                   shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.Desg.tooltip}" id="ot3"/>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.EmployeeId.label}" id="c4">
+                    <af:inputListOfValues id="employeeIdId"
+                                          popupTitle="Search and Select: #{bindings.VOCustEmployeeOvertime1.hints.EmployeeId.label}"
+                                          value="#{row.bindings.EmployeeId.inputValue}"
+                                          model="#{row.bindings.EmployeeId.listOfValuesModel}"
+                                          required="#{bindings.VOCustEmployeeOvertime1.hints.EmployeeId.mandatory}"
+                                          columns="#{bindings.VOCustEmployeeOvertime1.hints.EmployeeId.displayWidth}"
+                                          shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.EmployeeId.tooltip}"
+                                          clientComponent="true">
+                        <f:validator binding="#{row.bindings.EmployeeId.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOCustEmployeeOvertime1.hints.EmployeeId.format}"/>
+                    </af:inputListOfValues>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.label}" id="c5">
+                    <af:inputText value="#{row.bindings.OvertimeHours.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.tooltip}" id="it2"
+                                  clientComponent="false">
+                        <f:validator binding="#{row.bindings.OvertimeHours.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeHours.format}"/>
+                        <af:clientListener method="saveAction" type="keyPress"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDept.label}" id="c6"
+                           rendered="false">
+                    <af:inputText value="#{row.bindings.OvertimeDept.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDept.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDept.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDept.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDept.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.OvertimeDept.tooltip}" id="it3">
+                        <f:validator binding="#{row.bindings.OvertimeDept.validator}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.CreationDate.label}" id="c7"
+                           rendered="false">
+                    <af:inputDate value="#{row.bindings.CreationDate.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.CreationDate.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.CreationDate.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.CreationDate.displayWidth}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.CreationDate.tooltip}" id="id2">
+                        <f:validator binding="#{row.bindings.CreationDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOCustEmployeeOvertime1.hints.CreationDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.UpdationDate.label}" id="c8"
+                           rendered="false">
+                    <af:inputDate value="#{row.bindings.UpdationDate.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.UpdationDate.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.UpdationDate.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.UpdationDate.displayWidth}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.UpdationDate.tooltip}" id="id3">
+                        <f:validator binding="#{row.bindings.UpdationDate.validator}"/>
+                        <af:convertDateTime pattern="#{bindings.VOCustEmployeeOvertime1.hints.UpdationDate.format}"/>
+                    </af:inputDate>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.label}" id="c9"
+                           rendered="false">
+                    <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.tooltip}" id="it4">
+                        <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOCustEmployeeOvertime1.hints.CreatedBy.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.label}" id="c10"
+                           rendered="false">
+                    <af:inputText value="#{row.bindings.UpdatedBy.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.tooltip}" id="it5">
+                        <f:validator binding="#{row.bindings.UpdatedBy.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOCustEmployeeOvertime1.hints.UpdatedBy.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.label}" id="c11"
+                           rendered="false">
+                    <af:inputText value="#{row.bindings.VersionNumber.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.tooltip}" id="it6">
+                        <f:validator binding="#{row.bindings.VersionNumber.validator}"/>
+                        <af:convertNumber groupingUsed="false"
+                                          pattern="#{bindings.VOCustEmployeeOvertime1.hints.VersionNumber.format}"/>
+                    </af:inputText>
+                </af:column>
+                <af:column headerText="#{bindings.VOCustEmployeeOvertime1.hints.UserIpAddress.label}" id="c12"
+                           rendered="false">
+                    <af:inputText value="#{row.bindings.UserIpAddress.inputValue}"
+                                  label="#{bindings.VOCustEmployeeOvertime1.hints.UserIpAddress.label}"
+                                  required="#{bindings.VOCustEmployeeOvertime1.hints.UserIpAddress.mandatory}"
+                                  columns="#{bindings.VOCustEmployeeOvertime1.hints.UserIpAddress.displayWidth}"
+                                  maximumLength="#{bindings.VOCustEmployeeOvertime1.hints.UserIpAddress.precision}"
+                                  shortDesc="#{bindings.VOCustEmployeeOvertime1.hints.UserIpAddress.tooltip}" id="it7">
+                        <f:validator binding="#{row.bindings.UserIpAddress.validator}"/>
+                    </af:inputText>
+                </af:column>
+            </af:table>
+        </af:panelHeader>
+    </af:panelGroupLayout>
+    <af:resource type="javascript">
+    function setFocusByComponentId(id) {
+       var t = AdfPage.PAGE.findComponent(id);
+       var table = t.getParent();
+        t.focus();
+        
+         setTimeout(function () {
+                  table.simulateSelectRows(table.getActiveRowKey().toString(), '');
+              },
+              0);
+       
+      }
+      function saveAction(evt) {
+        var keycode = evt.getKeyCode();
+        if (keycode == 115){
+       
+            
+           var component = AdfPage.PAGE.findComponentByAbsoluteId("pt1:r1:0:b1");
+            AdfActionEvent.queue(component, component.getPartialSubmit()); 
+            
+        
+           
+           
+            
+           evt.cancel();  
+        }
+        if (keycode == 117){
+            var updateComp = AdfPage.PAGE.findComponentByAbsoluteId("pt1:r1:0:b4");
+            AdfActionEvent.queue(updateComp, component.getPartialSubmit()); 
+             evt.cancel();
+        }
+          
+        
+           
+      }
+      function which(evt){
+        var src = evt.getSource();
+        //alert(src);
+      }
+      function findKey(evt){
+        var keycode = evt.getKeyCode();
+        //alert(keycode);
+      }
+    </af:resource>
+    <!--oracle-jdev-comment:preferred-managed-bean-name:OvertimeBean-->
+</ui:composition>

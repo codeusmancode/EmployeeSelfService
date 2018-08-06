@@ -1,0 +1,12 @@
+//Groovy Scripts for essp.usg.model.entity_objects.EOLeavesPortal
+
+package essp.usg.model.entity_objects
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="SrNo")
+def SrNo_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("leaves_portal_HR_seq",adf.object.getDBTransaction())).getSequenceNumber()
+}
+
